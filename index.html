@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Gas & Go POS</title>
@@ -10,352 +13,323 @@
 
 </head>
 
+
 <body>
 
-<!-- ADMIN BUTTONS -->
+
+<!-- TOP BAR -->
+
+<header class="topbar">
+
+
+<h1>
+⛽ Gas & Go POS
+</h1>
+
 
 <div class="admin-buttons">
 
-    <button onclick="openAdminDashboard()" class="dashboard-btn">
-        ⚙ Admin Dashboard
-    </button>
+<button 
+onclick="openAdminDashboard()"
+class="dashboard-btn">
+
+⚙ Admin Dashboard
+
+</button>
 
 </div>
 
-
-<header>
-
-<h1>⛽ Gas & Go Cash Register</h1>
-
-<div class="top-bar">
-
-<input 
-type="text" 
-id="search"
-placeholder="Search products..."
->
-
-</div>
 
 </header>
 
 
 
-<div class="container">
 
 
-<!-- CATEGORIES -->
+<!-- CATEGORY BUTTONS -->
 
-<section class="categories">
 
-<h2>Categories</h2>
+<div class="categories">
 
-<button onclick="showCategory('Cold Drinks')">
+
+<button onclick="changeCategory('Cold Drinks')">
+
 🥤 Cold Drinks
+
 </button>
 
-<button onclick="showCategory('Energy Drinks')">
+
+<button onclick="changeCategory('Energy Drinks')">
+
 ⚡ Energy Drinks
+
 </button>
 
-<button onclick="showCategory('Snacks')">
+
+<button onclick="changeCategory('Snacks')">
+
 🍟 Snacks
+
 </button>
 
-<button onclick="showCategory('Hot Food')">
+
+<button onclick="changeCategory('Hot Food')">
+
 🌭 Hot Food
+
 </button>
 
-<button onclick="showCategory('Extras')">
+
+<button onclick="changeCategory('Extras')">
+
 ➕ Extras
+
 </button>
 
-<button onclick="showCategory('Gas')">
-⛽ Gas & Car Wash
+
+<button onclick="changeCategory('Gas')">
+
+⛽ Gas
+
 </button>
 
-</section>
+
+</div>
+
 
 
 
 
 <!-- PRODUCTS -->
 
-<section class="products">
-
-<h2 id="categoryTitle">
-Products
-</h2>
-
-<div id="productList">
-
-</div>
-
-</section>
+<div class="main">
 
 
-
-
-
-<!-- CART -->
-
-<section class="cart">
+<div class="products-section">
 
 
 <h2>
-🛒 Current Order
+Products
 </h2>
 
 
-<div id="cartItems">
+<div id="products">
 
-<p>
-No items added
-</p>
+</div>
+
+
+</div>
+
+    
+<!-- CART SECTION -->
+
+
+<div class="cart-section">
+
+
+<h2>
+🛒 Cart
+</h2>
+
+
+
+<div id="cart">
 
 </div>
 
 
 
-<h3>
+
+
+<h2>
+
 Total:
-$<span id="total">0</span>
-</h3>
+$
 
-
-
-<label>
-Cash Received:
-</label>
-
-
-<input 
-type="number" 
-id="cashInput"
-placeholder="Enter cash"
->
-
-
-
-<h3>
-Change:
-$<span id="change">
+<span id="total">
 0
 </span>
+
+</h2>
+
+
+
+
+
+<!-- PAYMENT -->
+
+
+<h3>
+Payment Method
 </h3>
 
 
 
+<button onclick="setPayment('Cash')">
+
+💵 Cash
+
+</button>
+
+
+
+<button onclick="setPayment('Card')">
+
+💳 Card
+
+</button>
+
+
+
+
+<p>
+
+Selected:
+
+<span id="paymentMethod">
+
+None
+
+</span>
+
+
+</p>
+
+
+
+
+
+
+
+<!-- CASH INPUT -->
+
+
+<input
+
+id="cashInput"
+
+type="number"
+
+placeholder="Cash Amount"
+
+>
+
+
+
+
+
+<p>
+
+Change:
+
+$
+
+<span id="change">
+
+0
+
+</span>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+<!-- ORDER BUTTONS -->
+
+
 <button 
-class="finish"
 onclick="finishOrder()"
->
+class="finish-btn">
+
 ✅ Finish Order
+
 </button>
 
 
 
+
+
 <button 
-class="clear"
-onclick="clearCart()"
->
-❌ Clear Order
+onclick="clearCart()">
+
+🗑 Clear Cart
+
 </button>
 
 
+
+
+
+
+
 <button 
-onclick="openHistory()"
->
+onclick="openHistory()">
+
 📜 Order History
+
 </button>
 
-
-</section>
 
 
 </div>
 
 
+</div>
+
+    
 
 
 
 
-<!-- RECEIPT WINDOW -->
+<!-- RECEIPT MODAL -->
 
 
 <div 
 id="receiptModal"
-class="modal"
->
+class="modal">
 
 
 <div class="modal-content">
 
 
 <h2>
-Receipt
+🧾 Receipt
 </h2>
 
 
-<div id="receipt">
 
-</div>
+<pre id="receipt">
+
+</pre>
+
+
+
+<button onclick="printReceipt()">
+
+🖨 Print
+
+</button>
+
+
 
 
 <button onclick="closeReceipt()">
+
 Close
-</button>
 
-
-</div>
-
-</div>
-
-
-
-
-
-
-
-<!-- ADMIN LOGIN -->
-
-
-<div 
-id="adminLogin"
-class="modal"
->
-
-
-<div class="modal-content">
-
-
-<h2>
-Admin Login
-</h2>
-
-
-<input
-type="password"
-id="adminPassword"
-placeholder="Password"
->
-
-
-<button onclick="loginAdmin()">
-Login
-</button>
-
-
-<button onclick="closeAdmin()">
-Cancel
-</button>
-
-
-</div>
-
-</div>
-
-
-
-
-
-
-
-
-<!-- ADMIN DASHBOARD -->
-
-
-<div 
-id="adminPanel"
-class="modal"
->
-
-
-<div class="modal-content admin-panel">
-
-
-<h2>
-⚙ Admin Dashboard
-</h2>
-
-
-
-<button onclick="closeAdminPanel()">
-Close
-</button>
-
-
-<hr>
-
-
-
-<h3>
-Add Product
-</h3>
-
-
-<input 
-id="newProductName"
-placeholder="Product name"
->
-
-
-<input 
-id="newProductPrice"
-placeholder="Price"
-type="number"
->
-
-
-<select id="newProductCategory">
-
-<option>
-Cold Drinks
-</option>
-
-<option>
-Energy Drinks
-</option>
-
-<option>
-Snacks
-</option>
-
-<option>
-Hot Food
-</option>
-
-<option>
-Extras
-</option>
-
-<option>
-Gas
-</option>
-
-
-</select>
-
-
-<button onclick="addProduct()">
-Add Product
 </button>
 
 
 
-
-<h3>
-Products
-</h3>
-
-
-<div id="adminProducts">
-
 </div>
 
-
-
-</div>
 
 </div>
 
@@ -365,13 +339,14 @@ Products
 
 
 
-<!-- ORDER HISTORY -->
+
+
+<!-- ORDER HISTORY MODAL -->
 
 
 <div 
 id="historyModal"
-class="modal"
->
+class="modal">
 
 
 <div class="modal-content">
@@ -380,6 +355,7 @@ class="modal"
 <h2>
 📜 Order History
 </h2>
+
 
 
 <div id="historyList">
@@ -387,9 +363,14 @@ class="modal"
 </div>
 
 
+
+
 <button onclick="closeHistory()">
+
 Close
+
 </button>
+
 
 
 </div>
@@ -401,179 +382,136 @@ Close
 
 
 
-<script src="script.js"></script>
-
-
-</body>
-</html>
-
-<!-- PAYMENT SECTION -->
-
-<div class="payment-area">
-
-<h3>
-Payment Method
-</h3>
-
-<button onclick="setPayment('Cash')">
-💵 Cash
-</button>
-
-<button onclick="setPayment('Card')">
-💳 Card
-</button>
-
-
-<p>
-Selected:
-<span id="paymentMethod">
-None
-</span>
-</p>
-
-
-</div>
 
 
 
 
+<!-- FUEL MODAL -->
 
-<!-- FUEL CALCULATOR -->
 
 <div 
-id="fuelModal" 
-class="modal"
->
+id="fuelModal"
+class="modal">
+
 
 <div class="modal-content">
 
+
 <h2>
-⛽ Fuel Calculator
+⛽ Fuel Purchase
 </h2>
 
 
-<label>
-Fuel Type
-</label>
 
 
 <select id="fuelType">
 
+
 <option value="749">
+
 Regular - $749/gal
+
 </option>
+
+
 
 <option value="829">
+
 Plus - $829/gal
+
 </option>
+
+
 
 <option value="949">
+
 Premium - $949/gal
+
 </option>
 
+
+
 <option value="1250">
+
 Exclusive - $1250/gal
+
 </option>
+
+
 
 </select>
 
 
 
-<label>
-Gallons
-</label>
 
 
-<input 
-type="number"
+
+
+<input
+
 id="gallons"
-placeholder="Amount of gallons"
+
+type="number"
+
+placeholder="Gallons"
+
 >
+
+
 
 
 
 <button onclick="addFuel()">
+
 Add Fuel
+
 </button>
+
+
 
 
 
 <button onclick="closeFuel()">
-Close
+
+Cancel
+
 </button>
 
-
-</div>
-
-</div>
-
-
-
-
-
-
-
-<!-- ADD FUEL BUTTON -->
-
-<button 
-class="fuel-button"
-onclick="openFuel()"
->
-⛽ Add Fuel
-</button>
-
-
-
-
-
-
-<!-- ADMIN PRODUCT EDIT TEMPLATE -->
-
-<template id="adminProductTemplate">
-
-<div class="admin-product">
-
-
-<span class="admin-name">
-Product
-</span>
-
-
-<input 
-class="admin-price"
-type="number"
->
-
-
-<button class="save-price">
-Save
-</button>
-
-
-<button class="delete-product">
-Delete
-</button>
 
 
 </div>
 
 
-</template>
+</div>
+
+    
 
 
 
-
-
-
-
-<!-- SALE COMPLETE MESSAGE -->
-
+<!-- SALE MESSAGE -->
 
 <div 
 id="saleMessage"
-class="sale-message"
->
+class="sale-message">
 
-Order Completed!
+
+✅ Order Completed!
+
 
 </div>
+
+
+
+
+
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
+
+
+
+</body>
+
+</html>
