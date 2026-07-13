@@ -3,7 +3,7 @@
 // =======================================
 
 
-const ADMIN_PASSWORD = "gasandgorihandy27";
+const ADMIN_PASSWORD = "gasandgorishandy27";
 
 
 
