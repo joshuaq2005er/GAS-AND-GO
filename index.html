@@ -27,17 +27,13 @@
 </h1>
 
 
-<div class="admin-buttons">
-
 <button 
 onclick="openAdminDashboard()"
-class="dashboard-btn">
+class="admin-btn">
 
 ⚙ Admin Dashboard
 
 </button>
-
-</div>
 
 
 </header>
@@ -46,51 +42,50 @@ class="dashboard-btn">
 
 
 
-<!-- CATEGORY BUTTONS -->
+<!-- POS MAIN WINDOW -->
+
+<div class="pos-container">
 
 
-<div class="categories">
+
+<!-- LEFT CATEGORY PANEL -->
+
+
+<div class="category-panel">
+
+
+<h2>
+Categories
+</h2>
 
 
 <button onclick="changeCategory('Cold Drinks')">
-
 🥤 Cold Drinks
-
 </button>
 
 
 <button onclick="changeCategory('Energy Drinks')">
-
 ⚡ Energy Drinks
-
 </button>
 
 
 <button onclick="changeCategory('Snacks')">
-
 🍟 Snacks
-
 </button>
 
 
 <button onclick="changeCategory('Hot Food')">
-
 🌭 Hot Food
-
 </button>
 
 
 <button onclick="changeCategory('Extras')">
-
 ➕ Extras
-
 </button>
 
 
 <button onclick="changeCategory('Gas')">
-
 ⛽ Gas
-
 </button>
 
 
@@ -99,13 +94,10 @@ class="dashboard-btn">
 
 
 
-
-<!-- PRODUCTS -->
-
-<div class="main">
+<!-- PRODUCTS PANEL -->
 
 
-<div class="products-section">
+<div class="products-panel">
 
 
 <h2>
@@ -113,18 +105,25 @@ Products
 </h2>
 
 
+
 <div id="products">
 
-</div>
-
 
 </div>
 
-    
-<!-- CART SECTION -->
 
 
-<div class="cart-section">
+</div>
+
+
+
+
+
+
+<!-- CART PANEL -->
+
+
+<div class="cart-panel">
 
 
 <h2>
@@ -133,7 +132,9 @@ Products
 
 
 
+
 <div id="cart">
+
 
 </div>
 
@@ -147,8 +148,11 @@ Total:
 $
 
 <span id="total">
+
 0
+
 </span>
+
 
 </h2>
 
@@ -160,7 +164,7 @@ $
 
 
 <h3>
-Payment Method
+Payment
 </h3>
 
 
@@ -173,11 +177,13 @@ Payment Method
 
 
 
+
 <button onclick="setPayment('Card')">
 
 💳 Card
 
 </button>
+
 
 
 
@@ -199,11 +205,6 @@ None
 
 
 
-
-
-<!-- CASH INPUT -->
-
-
 <input
 
 id="cashInput"
@@ -213,6 +214,7 @@ type="number"
 placeholder="Cash Amount"
 
 >
+
 
 
 
@@ -233,10 +235,7 @@ $
 
 </p>
 
-
-
-
-
+    
 
 
 
@@ -244,7 +243,7 @@ $
 <!-- ORDER BUTTONS -->
 
 
-<button 
+<button
 onclick="finishOrder()"
 class="finish-btn">
 
@@ -256,8 +255,7 @@ class="finish-btn">
 
 
 
-<button 
-onclick="clearCart()">
+<button onclick="clearCart()">
 
 🗑 Clear Cart
 
@@ -267,10 +265,7 @@ onclick="clearCart()">
 
 
 
-
-
-<button 
-onclick="openHistory()">
+<button onclick="openHistory()">
 
 📜 Order History
 
@@ -278,17 +273,22 @@ onclick="openHistory()">
 
 
 
-</div>
 
 
 </div>
+
+<!-- END CART PANEL -->
+
+
+</div>
+
+<!-- END POS CONTAINER -->
 
     
 
 
 
-
-<!-- RECEIPT MODAL -->
+<!-- RECEIPT WINDOW -->
 
 
 <div 
@@ -311,12 +311,12 @@ class="modal">
 
 
 
+
 <button onclick="printReceipt()">
 
 🖨 Print
 
 </button>
-
 
 
 
@@ -330,7 +330,6 @@ Close
 
 </div>
 
-
 </div>
 
 
@@ -339,9 +338,7 @@ Close
 
 
 
-
-
-<!-- ORDER HISTORY MODAL -->
+<!-- ORDER HISTORY WINDOW -->
 
 
 <div 
@@ -355,6 +352,7 @@ class="modal">
 <h2>
 📜 Order History
 </h2>
+
 
 
 
@@ -375,7 +373,6 @@ Close
 
 </div>
 
-
 </div>
 
 
@@ -384,9 +381,7 @@ Close
 
 
 
-
-
-<!-- FUEL MODAL -->
+<!-- FUEL WINDOW -->
 
 
 <div 
@@ -438,10 +433,7 @@ Exclusive - $1250/gal
 </option>
 
 
-
 </select>
-
-
 
 
 
@@ -470,7 +462,6 @@ Add Fuel
 
 
 
-
 <button onclick="closeFuel()">
 
 Cancel
@@ -479,8 +470,8 @@ Cancel
 
 
 
-</div>
 
+</div>
 
 </div>
 
@@ -488,7 +479,9 @@ Cancel
 
 
 
+
 <!-- SALE MESSAGE -->
+
 
 <div 
 id="saleMessage"
@@ -506,7 +499,8 @@ class="sale-message">
 
 
 
-<!-- JAVASCRIPT -->
+<!-- SCRIPT -->
+
 
 <script src="script.js"></script>
 
