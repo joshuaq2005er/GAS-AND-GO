@@ -529,3 +529,33 @@ position:relative;
 
 
 }
+
+
+.admin-buttons {
+
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 100;
+
+}
+
+
+.dashboard-btn {
+
+    background:#0066cc;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+
+}
+
+
+.dashboard-btn:hover {
+
+    background:#0088ff;
+
+}
