@@ -1,34 +1,25 @@
-// ==================================
-// GAS & GO ADMIN DASHBOARD
-// ==================================
+// =======================================
+// GAS & GO ADMIN DASHBOARD V2
+// =======================================
 
-
-// ADMIN PASSWORD
 
 const ADMIN_PASSWORD = "gasandgorihandy27";
 
 
 
-
-// LOAD DATA
-
 let products =
-JSON.parse(
-localStorage.getItem("products")
-) || [];
+JSON.parse(localStorage.getItem("products")) || [];
 
 
 let orders =
-JSON.parse(
-localStorage.getItem("orders")
-) || [];
+JSON.parse(localStorage.getItem("orders")) || [];
 
 
 
 
-// ==================================
+// =======================================
 // LOGIN
-// ==================================
+// =======================================
 
 
 function adminLogin(){
@@ -42,7 +33,7 @@ function adminLogin(){
     if(password === ADMIN_PASSWORD){
 
 
-        document.getElementById("loginBox")
+        document.getElementById("loginScreen")
         .style.display="none";
 
 
@@ -50,11 +41,7 @@ function adminLogin(){
         .style.display="block";
 
 
-        loadProducts();
-
-        loadOrders();
-
-        loadStats();
+        loadDashboard();
 
 
     }
@@ -62,10 +49,22 @@ function adminLogin(){
 
 
         document.getElementById("loginError")
-        .innerText="❌ Incorrect password";
+        .innerText =
+        "❌ Wrong password";
 
 
     }
+
+}
+
+
+
+
+
+function logoutAdmin(){
+
+
+    location.reload();
 
 
 }
@@ -75,22 +74,133 @@ function adminLogin(){
 
 
 
-// ==================================
+
+// =======================================
+// TABS
+// =======================================
+
+
+function openTab(tab){
+
+
+
+    document
+    .querySelectorAll(".admin-tab")
+    .forEach(section=>{
+
+
+        section.style.display="none";
+
+
+    });
+
+
+
+    document
+    .getElementById(tab)
+    .style.display="block";
+
+
+
+    if(tab==="productsTab"){
+
+        loadProducts();
+
+    }
+
+
+
+    if(tab==="ordersTab"){
+
+        loadOrders();
+
+    }
+
+
+
+    if(tab==="analyticsTab"){
+
+        loadAnalytics();
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+// =======================================
+// DASHBOARD
+// =======================================
+
+
+function loadDashboard(){
+
+
+    document
+    .getElementById("totalOrders")
+    .innerText =
+    orders.length;
+
+
+
+    let revenue=0;
+
+
+    orders.forEach(order=>{
+
+        revenue += order.total;
+
+    });
+
+
+
+    document
+    .getElementById("totalRevenue")
+    .innerText =
+    "$"+revenue;
+
+
+
+    document
+    .getElementById("totalProducts")
+    .innerText =
+    products.length;
+
+
+}
+
+
+
+
+
+
+
+
+// =======================================
 // PRODUCTS
-// ==================================
+// =======================================
 
 
 function saveProducts(){
 
 
     localStorage.setItem(
+
         "products",
+
         JSON.stringify(products)
+
     );
 
 
 }
-
 
 
 
@@ -101,7 +211,7 @@ function loadProducts(){
 
     let box =
     document.getElementById(
-        "adminProductList"
+    "adminProductList"
     );
 
 
@@ -109,48 +219,81 @@ function loadProducts(){
 
 
 
-    products.forEach((product,index)=>{
+    let search =
+
+    document
+    .getElementById("productSearch")
+    .value
+    .toLowerCase();
+
+
+
+
+    products
+
+    .filter(product=>
+
+    product.name
+    .toLowerCase()
+    .includes(search)
+
+    )
+
+
+    .forEach((product,index)=>{
+
 
 
         let div =
         document.createElement("div");
 
 
-        div.className="admin-product";
+
+        div.className =
+        "admin-product";
 
 
 
-        div.innerHTML=`
+        div.innerHTML = `
 
-        <span>
 
-        <b>${product.name}</b>
+        <div>
+
+        <b>
+        ${product.name}
+        </b>
+
         <br>
 
         Category:
         ${product.category}
 
-        </span>
+        </div>
 
 
 
-        <input 
+        <input
+        id="editPrice${index}"
         type="number"
         value="${product.price}"
-        id="price${index}"
         >
 
 
 
-        <button onclick="changePrice(${index})">
+        <button onclick="savePrice(${index})">
+
         Save
+
         </button>
 
 
 
         <button onclick="deleteProduct(${index})">
+
         Delete
+
         </button>
+
 
 
         `;
@@ -171,42 +314,64 @@ function loadProducts(){
 
 
 
+document
+.addEventListener(
+"input",
+function(e){
+
+
+    if(e.target.id==="productSearch"){
+
+
+        loadProducts();
+
+
+    }
+
+
+});
+
+
+
+
+
+
+
 
 function addAdminProduct(){
 
 
     let name =
-    document.getElementById(
-        "productName"
-    ).value;
+    document
+    .getElementById("productName")
+    .value;
 
 
 
     let price =
     Number(
-    document.getElementById(
-        "productPrice"
-    ).value
+    document
+    .getElementById("productPrice")
+    .value
     );
 
 
 
     let category =
-    document.getElementById(
-        "productCategory"
-    ).value;
+    document
+    .getElementById("productCategory")
+    .value;
 
 
 
 
     if(
-        name===""
-        ||
-        price<=0
+    !name ||
+    price<=0
     ){
 
         alert(
-        "Fill all fields"
+        "Invalid information"
         );
 
         return;
@@ -228,23 +393,15 @@ function addAdminProduct(){
 
 
 
-
-
     saveProducts();
+
 
 
     loadProducts();
 
 
 
-    document.getElementById(
-    "productName"
-    ).value="";
-
-
-    document.getElementById(
-    "productPrice"
-    ).value="";
+    loadDashboard();
 
 
 }
@@ -255,24 +412,27 @@ function addAdminProduct(){
 
 
 
+function savePrice(index){
 
-
-function changePrice(index){
 
 
     let price =
 
     Number(
 
-    document.getElementById(
-        "price"+index
-    ).value
+    document
+    .getElementById(
+    "editPrice"+index
+    )
+    .value
 
     );
 
 
 
-    products[index].price=price;
+    products[index].price =
+    price;
+
 
 
     saveProducts();
@@ -292,16 +452,15 @@ function changePrice(index){
 function deleteProduct(index){
 
 
-    if(
-    confirm(
-    "Delete product?"
-    )
-    ){
+
+    if(confirm(
+    "Delete this product?"
+    )){
 
 
         products.splice(
-            index,
-            1
+        index,
+        1
         );
 
 
@@ -309,6 +468,9 @@ function deleteProduct(index){
 
 
         loadProducts();
+
+
+        loadDashboard();
 
 
     }
@@ -322,10 +484,9 @@ function deleteProduct(index){
 
 
 
-
-// ==================================
+// =======================================
 // ORDERS
-// ==================================
+// =======================================
 
 
 function loadOrders(){
@@ -333,32 +494,15 @@ function loadOrders(){
 
 
     let box =
-    document.getElementById(
-        "orders"
-    );
-
+    document.getElementById("orders");
 
 
     box.innerHTML="";
 
 
 
-    if(orders.length===0){
-
-
-        box.innerHTML=
-        "No orders";
-
-
-        return;
-
-    }
-
-
-
-
-
     orders
+    .slice()
     .reverse()
     .forEach(order=>{
 
@@ -367,8 +511,8 @@ function loadOrders(){
         document.createElement("div");
 
 
-
-        div.className="cart-item";
+        div.className =
+        "cart-item";
 
 
 
@@ -402,6 +546,161 @@ function loadOrders(){
     });
 
 
+}
+
+
+
+
+
+
+
+function clearOrders(){
+
+
+    if(confirm(
+    "Delete all orders?"
+    )){
+
+
+        orders=[];
+
+
+        localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+        );
+
+
+        loadOrders();
+
+
+        loadDashboard();
+
+
+    }
+
+
+}
+// =======================================
+// ANALYTICS
+// =======================================
+
+
+function loadAnalytics(){
+
+
+    let revenue = 0;
+
+    let itemCount = {};
+
+
+
+    orders.forEach(order=>{
+
+
+        revenue += order.total;
+
+
+
+        order.items.forEach(item=>{
+
+
+            if(!itemCount[item.name]){
+
+                itemCount[item.name]=0;
+
+            }
+
+
+            itemCount[item.name] += item.quantity;
+
+
+        });
+
+
+
+    });
+
+
+
+
+
+    let mostSold = "None";
+
+    let highest = 0;
+
+
+
+    for(let item in itemCount){
+
+
+        if(itemCount[item] > highest){
+
+
+            highest = itemCount[item];
+
+            mostSold=item;
+
+
+        }
+
+
+    }
+
+
+
+
+
+    document
+    .getElementById("analytics")
+    .innerHTML = `
+
+
+    <div class="card">
+
+    <h3>
+    Total Revenue
+    </h3>
+
+    <p>
+    $${revenue}
+    </p>
+
+    </div>
+
+
+
+    <div class="card">
+
+    <h3>
+    Total Orders
+    </h3>
+
+    <p>
+    ${orders.length}
+    </p>
+
+    </div>
+
+
+
+    <div class="card">
+
+    <h3>
+    Best Selling Item
+    </h3>
+
+    <p>
+    ${mostSold}
+    </p>
+
+    </div>
+
+
+
+    `;
+
+
 
 }
 
@@ -413,61 +712,195 @@ function loadOrders(){
 
 
 
-// ==================================
-// STATISTICS
-// ==================================
+// =======================================
+// EXPORT BACKUP
+// =======================================
 
 
-function loadStats(){
+function exportData(){
 
 
-
-    let revenue=0;
-
-
-    orders.forEach(order=>{
+    let backup = {
 
 
-        revenue += order.total;
+        products:products,
+
+        orders:orders
 
 
-    });
-
+    };
 
 
 
-    document.getElementById(
-        "stats"
-    ).innerHTML=`
+    let blob = new Blob(
 
-    <h3>
-    Total Orders:
-    ${orders.length}
-    </h3>
+    [
 
-
-    <h3>
-    Revenue:
-    $${revenue}
-    </h3>
-
-
-    <h3>
-    Average Sale:
-    $
-    ${
-    orders.length
-    ?
-    Math.round(
-    revenue/orders.length
+    JSON.stringify(
+    backup,
+    null,
+    2
     )
-    :
-    0
+
+    ],
+
+    {
+
+    type:"application/json"
+
     }
 
-    </h3>
+    );
 
-    `;
+
+
+    let link =
+    document.createElement("a");
+
+
+
+    link.href =
+    URL.createObjectURL(blob);
+
+
+
+    link.download =
+    "gas-go-backup.json";
+
+
+
+    link.click();
+
+
+}
+
+
+
+
+
+
+
+
+
+// =======================================
+// IMPORT BACKUP
+// =======================================
+
+
+function importData(event){
+
+
+    let file =
+    event.target.files[0];
+
+
+
+    if(!file)
+    return;
+
+
+
+    let reader =
+    new FileReader();
+
+
+
+    reader.onload=function(e){
+
+
+        let data =
+        JSON.parse(
+        e.target.result
+        );
+
+
+
+        if(data.products){
+
+
+            products =
+            data.products;
+
+
+        }
+
+
+
+
+        if(data.orders){
+
+
+            orders =
+            data.orders;
+
+
+        }
+
+
+
+        saveProducts();
+
+
+
+        localStorage.setItem(
+
+        "orders",
+
+        JSON.stringify(orders)
+
+        );
+
+
+
+        alert(
+        "Backup restored!"
+        );
+
+
+
+        location.reload();
+
+
+    };
+
+
+
+    reader.readAsText(file);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// =======================================
+// RESET SYSTEM
+// =======================================
+
+
+function resetEverything(){
+
+
+
+    if(confirm(
+    "WARNING: Delete ALL products and orders?"
+    )){
+
+
+        localStorage.clear();
+
+
+        location.reload();
+
+
+
+    }
 
 
 
