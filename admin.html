@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gas & Go Admin</title>
+<title>Gas & Go Admin Dashboard</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -18,7 +18,12 @@
 
 
 
-<div id="loginBox" class="modal-content">
+<!-- LOGIN -->
+
+<div id="loginScreen">
+
+
+<div class="admin-login">
 
 
 <h1>
@@ -27,9 +32,9 @@
 
 
 <input
-type="password"
 id="password"
-placeholder="Admin Password"
+type="password"
+placeholder="Enter Password"
 >
 
 
@@ -44,8 +49,15 @@ Login
 </div>
 
 
+</div>
 
 
+
+
+
+
+
+<!-- DASHBOARD -->
 
 
 <div id="dashboard" style="display:none;">
@@ -54,13 +66,14 @@ Login
 
 <header>
 
+
 <h1>
-⚙ Gas & Go Admin Dashboard
+⛽ Gas & Go Admin Panel
 </h1>
 
 
 <button onclick="location.href='index.html'">
-⬅ Back To Register
+⬅ Register
 </button>
 
 
@@ -70,24 +83,173 @@ Login
 
 
 
-<div class="container">
+
+
+<div class="admin-layout">
 
 
 
 
 
-<section>
+
+<!-- SIDEBAR -->
+
+
+<aside class="sidebar">
+
+
+<button onclick="openTab('dashboardTab')">
+🏠 Dashboard
+</button>
+
+
+<button onclick="openTab('productsTab')">
+📦 Products
+</button>
+
+
+<button onclick="openTab('ordersTab')">
+🧾 Orders
+</button>
+
+
+<button onclick="openTab('analyticsTab')">
+📊 Analytics
+</button>
+
+
+<button onclick="openTab('settingsTab')">
+⚙ Settings
+</button>
+
+
+
+<button onclick="logoutAdmin()">
+🚪 Logout
+</button>
+
+
+</aside>
+
+
+
+
+
+
+
+
+<!-- CONTENT -->
+
+<main class="admin-content">
+
+
+
+
+
+
+<!-- DASHBOARD -->
+
+
+<section id="dashboardTab" class="admin-tab">
 
 
 <h2>
-➕ Add Product
+Overview
 </h2>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+Orders
+</h3>
+
+<p id="totalOrders">
+0
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Revenue
+</h3>
+
+<p id="totalRevenue">
+$0
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+Products
+</h3>
+
+<p id="totalProducts">
+0
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- PRODUCTS -->
+
+
+<section id="productsTab" class="admin-tab" style="display:none;">
+
+
+
+<h2>
+📦 Product Management
+</h2>
+
+
+
+
+<input
+id="productSearch"
+placeholder="Search products..."
+>
+
+
+
+
+<h3>
+Add Product
+</h3>
+
 
 
 <input
 id="productName"
-placeholder="Product Name"
+placeholder="Name"
 >
+
 
 
 <input
@@ -95,6 +257,7 @@ id="productPrice"
 type="number"
 placeholder="Price"
 >
+
 
 
 
@@ -131,9 +294,127 @@ Gas
 
 
 <button onclick="addAdminProduct()">
-
 Add Product
+</button>
 
+
+
+
+<hr>
+
+
+
+<div id="adminProductList">
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ORDERS -->
+
+
+<section id="ordersTab" class="admin-tab" style="display:none;">
+
+
+<h2>
+🧾 Order History
+</h2>
+
+
+
+<button onclick="clearOrders()">
+Clear History
+</button>
+
+
+
+<div id="orders">
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ANALYTICS -->
+
+
+<section id="analyticsTab" class="admin-tab" style="display:none;">
+
+
+<h2>
+📊 Analytics
+</h2>
+
+
+
+<div id="analytics">
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- SETTINGS -->
+
+
+<section id="settingsTab" class="admin-tab" style="display:none;">
+
+
+
+<h2>
+⚙ Settings
+</h2>
+
+
+
+<button onclick="exportData()">
+💾 Export Backup
+</button>
+
+
+
+
+<input 
+type="file"
+onchange="importData(event)"
+>
+
+
+
+<br><br>
+
+
+
+<button onclick="resetEverything()">
+⚠ Reset Everything
 </button>
 
 
@@ -146,73 +427,13 @@ Add Product
 
 
 
-<section>
-
-
-<h2>
-📦 Products
-</h2>
-
-
-<div id="adminProductList">
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-
-<h2>
-📜 Order History
-</h2>
-
-
-<div id="orders">
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-
-<h2>
-📊 Statistics
-</h2>
-
-
-<div id="stats">
-
-</div>
-
-
-</section>
-
-
+</main>
 
 
 </div>
 
 
-
 </div>
-
-
 
 
 
