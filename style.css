@@ -1,0 +1,531 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+body {
+    margin: 0;
+    background: #111;
+    color: white;
+}
+
+
+/* HEADER */
+
+header {
+    background: #1d1d1d;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #333;
+}
+
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+
+.top-bar {
+    margin-top: 15px;
+}
+
+
+#search {
+    width: 80%;
+    max-width: 500px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 18px;
+}
+
+
+
+
+/* ADMIN BUTTON */
+
+.admin-btn {
+
+    position: fixed;
+    top: 15px;
+    left: 15px;
+
+    background: #333;
+    color: white;
+
+    border: none;
+
+    border-radius: 50%;
+
+    width: 45px;
+    height: 45px;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    z-index: 100;
+
+}
+
+
+.admin-btn:hover {
+    background:#555;
+}
+
+
+
+
+
+
+/* MAIN LAYOUT */
+
+.container {
+
+    display:grid;
+
+    grid-template-columns:
+    220px
+    1fr
+    350px;
+
+
+    gap:15px;
+
+    padding:15px;
+
+}
+
+
+
+
+
+section {
+
+    background:#1b1b1b;
+
+    padding:15px;
+
+    border-radius:10px;
+
+}
+
+
+
+
+
+/* CATEGORY BUTTONS */
+
+
+.categories button {
+
+    display:block;
+
+    width:100%;
+
+    margin-bottom:10px;
+
+}
+
+
+
+
+
+button {
+
+    background:#333;
+
+    color:white;
+
+    border:none;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+}
+
+
+button:hover {
+
+    background:#555;
+
+}
+
+
+
+
+/* PRODUCTS */
+
+
+#productList {
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fill,minmax(150px,1fr));
+
+    gap:10px;
+
+}
+
+
+
+.product {
+
+
+    background:#242424;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    text-align:center;
+
+}
+
+
+.product:hover {
+
+    background:#333;
+
+}
+
+
+
+
+.product-name {
+
+    font-size:17px;
+
+    display:block;
+
+}
+
+
+
+.product-price {
+
+    color:#00ff88;
+
+    margin-top:5px;
+
+    display:block;
+
+}
+
+
+
+
+
+
+/* CART */
+
+
+.cart {
+
+    position:sticky;
+
+    top:10px;
+
+}
+
+
+
+#cartItems {
+
+    max-height:400px;
+
+    overflow:auto;
+
+}
+
+
+
+
+
+.cart-item {
+
+    background:#242424;
+
+    padding:10px;
+
+    margin-bottom:8px;
+
+    border-radius:8px;
+
+}
+
+
+
+
+.cart-item button {
+
+    padding:5px 10px;
+
+}
+
+
+
+
+
+.finish {
+
+    background:#008f39;
+
+    width:100%;
+
+}
+
+
+.finish:hover {
+
+    background:#00b84d;
+
+}
+
+
+
+
+.clear {
+
+    background:#a00000;
+
+    width:100%;
+
+}
+
+
+
+
+
+input, select {
+
+    width:100%;
+
+    padding:10px;
+
+    margin:8px 0;
+
+    border-radius:6px;
+
+    border:none;
+
+}
+
+
+
+
+
+
+/* MODALS */
+
+
+.modal {
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.75);
+
+    z-index:200;
+
+}
+
+
+
+.modal-content {
+
+    background:#1b1b1b;
+
+    width:90%;
+
+    max-width:500px;
+
+    margin:80px auto;
+
+    padding:25px;
+
+    border-radius:12px;
+
+}
+
+
+
+
+
+.admin-panel {
+
+    max-height:80vh;
+
+    overflow:auto;
+
+}
+
+
+
+
+
+/* ADMIN PRODUCTS */
+
+
+.admin-product {
+
+    display:flex;
+
+    gap:5px;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+    background:#242424;
+
+    padding:10px;
+
+    border-radius:8px;
+
+}
+
+
+
+.admin-name {
+
+    flex:1;
+
+}
+
+
+
+
+
+.delete-product {
+
+    background:#990000;
+
+}
+
+
+
+
+
+.save-price {
+
+    background:#0066cc;
+
+}
+
+
+
+
+
+/* RECEIPT */
+
+
+#receipt {
+
+    background:white;
+
+    color:black;
+
+    padding:20px;
+
+    border-radius:5px;
+
+    white-space:pre-line;
+
+}
+
+
+
+
+
+/* PAYMENT */
+
+
+.payment-area button {
+
+    width:45%;
+
+}
+
+
+
+
+
+.fuel-button {
+
+    position:fixed;
+
+    bottom:20px;
+
+    left:20px;
+
+    background:#0066cc;
+
+}
+
+
+
+
+
+
+
+.sale-message {
+
+    display:none;
+
+    position:fixed;
+
+    bottom:30px;
+
+    right:30px;
+
+    background:#008f39;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    font-size:20px;
+
+}
+
+
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:900px){
+
+
+.container {
+
+grid-template-columns:1fr;
+
+}
+
+
+.cart {
+
+position:relative;
+
+}
+
+
+}
