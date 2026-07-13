@@ -1,14 +1,230 @@
-// ==============================
+// =====================================
 // GAS & GO POS SYSTEM
-// SCRIPT PART 1
+// SCRIPT.JS PART 1
+// =====================================
+
+
+// ==============================
+// PRODUCTS DATABASE
 // ==============================
 
 
-// ADMIN PASSWORD
-const ADMIN_PASSWORD = "gasandgorihandy27";
+let products = JSON.parse(
+    localStorage.getItem("products")
+) || [
 
 
-// CART DATA
+    // COLD DRINKS
+
+    {
+        name:"Water",
+        price:150,
+        category:"Cold Drinks"
+    },
+
+    {
+        name:"Sparkling Water",
+        price:200,
+        category:"Cold Drinks"
+    },
+
+    {
+        name:"Soda (Any)",
+        price:250,
+        category:"Cold Drinks"
+    },
+
+    {
+        name:"Juice (Any)",
+        price:275,
+        category:"Cold Drinks"
+    },
+
+    {
+        name:"Iced Coffee",
+        price:350,
+        category:"Cold Drinks"
+    },
+
+    {
+        name:"Bloxy Cola",
+        price:380,
+        category:"Cold Drinks"
+    },
+
+    {
+        name:"Lemonade",
+        price:260,
+        category:"Cold Drinks"
+    },
+
+    {
+        name:"Iced Tea",
+        price:240,
+        category:"Cold Drinks"
+    },
+
+
+    // ENERGY
+
+    {
+        name:"Monster Original Black",
+        price:400,
+        category:"Energy Drinks"
+    },
+
+    {
+        name:"Monster Zero Ultra",
+        price:420,
+        category:"Energy Drinks"
+    },
+
+    {
+        name:"Monster Ultra Fiesta",
+        price:430,
+        category:"Energy Drinks"
+    },
+
+    {
+        name:"Monster Mango Loco",
+        price:460,
+        category:"Energy Drinks"
+    },
+
+    {
+        name:"Red Bull Original",
+        price:400,
+        category:"Energy Drinks"
+    },
+
+    {
+        name:"Rockstar Original",
+        price:380,
+        category:"Energy Drinks"
+    },
+
+
+    // SNACKS
+
+    {
+        name:"Lays Classic",
+        price:225,
+        category:"Snacks"
+    },
+
+    {
+        name:"Doritos Nacho Cheese",
+        price:260,
+        category:"Snacks"
+    },
+
+    {
+        name:"Pringles Original",
+        price:250,
+        category:"Snacks"
+    },
+
+    {
+        name:"Snickers",
+        price:175,
+        category:"Snacks"
+    },
+
+    {
+        name:"KitKat",
+        price:180,
+        category:"Snacks"
+    },
+
+
+    // HOT FOOD
+
+    {
+        name:"Hot Dog",
+        price:500,
+        category:"Hot Food"
+    },
+
+    {
+        name:"Pizza Slice",
+        price:475,
+        category:"Hot Food"
+    },
+
+    {
+        name:"Chicken Tenders",
+        price:650,
+        category:"Hot Food"
+    },
+
+
+    // EXTRAS
+
+    {
+        name:"Gum",
+        price:100,
+        category:"Extras"
+    },
+
+    {
+        name:"Mints",
+        price:125,
+        category:"Extras"
+    },
+
+
+    // GAS
+
+    {
+        name:"Regular Fuel",
+        price:749,
+        category:"Gas"
+    },
+
+    {
+        name:"Plus Fuel",
+        price:829,
+        category:"Gas"
+    },
+
+    {
+        name:"Premium Fuel",
+        price:949,
+        category:"Gas"
+    },
+
+    {
+        name:"Exclusive Fuel",
+        price:1250,
+        category:"Gas"
+    }
+
+
+];
+
+
+
+
+
+function saveProducts(){
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+
+}
+
+
+
+
+
+
+// ==============================
+// CART
+// ==============================
+
+
 let cart = [];
 
 let currentCategory = "Cold Drinks";
@@ -18,10 +234,141 @@ let paymentMethod = "None";
 
 
 
+
 // ==============================
-// PRODUCTS DATABASE
+// DISPLAY PRODUCTS
 // ==============================
 
+
+function displayProducts(){
+
+
+    let box =
+    document.getElementById(
+        "products"
+    );
+
+
+    if(!box)
+    return;
+
+
+
+    box.innerHTML="";
+
+
+
+    products
+
+    .filter(product =>
+
+        product.category === currentCategory
+
+    )
+
+    .forEach((product,index)=>{
+
+
+        let button =
+        document.createElement("button");
+
+
+
+        button.className="product";
+
+
+
+        button.innerHTML=
+
+        `
+
+        ${product.name}
+
+        <br>
+
+        $${product.price}
+
+        `;
+
+
+
+        button.onclick=function(){
+
+            addToCart(product);
+
+        };
+
+
+
+        box.appendChild(button);
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+function changeCategory(category){
+
+
+    currentCategory=category;
+
+
+    displayProducts();
+
+
+}
+
+
+
+
+
+
+
+// ==============================
+// CART FUNCTIONS
+// ==============================
+
+
+function addToCart(product){
+
+
+
+    let existing =
+
+    cart.find(
+        item =>
+        item.name === product.name
+    );
+
+
+
+    if(existing){
+
+
+        existing.quantity++;
+
+
+    }
+
+    else{
+
+
+        cart.push({
+
+            name:product.name,
+
+            price:product.price,
+
+            quantity:1
+
+        });
 
 
     }
@@ -31,20 +378,113 @@ let paymentMethod = "None";
     updateCart();
 
 
+
 }
 
 
 
+
+
+
+function updateCart(){
+
+
+    let box =
+    document.getElementById(
+        "cart"
+    );
+
+
+    if(!box)
+    return;
+
+
+
+    box.innerHTML="";
+
+
+    let total=0;
+
+
+
+    cart.forEach((item,index)=>{
+
+
+        total +=
+        item.price *
+        item.quantity;
+
+
+
+        let div =
+        document.createElement("div");
+
+
+
+        div.className="cart-item";
+
+
+
+        div.innerHTML=
+
+        `
+
+        ${item.name}
+
+        <br>
+
+        ${item.quantity} x $${item.price}
+
+        <button onclick="removeItem(${index})">
+
+        ❌
+
+        </button>
+
+        `;
+
+
+
+        box.appendChild(div);
+
+
+    });
+
+
+
+
+    document.getElementById(
+        "total"
+    ).innerText =
+    total;
+
+
+
+}
+
+// =====================================
+// GAS & GO POS SYSTEM
+// SCRIPT.JS PART 2
+// CHECKOUT + RECEIPTS + HISTORY
+// =====================================
+
+
+
+// ==============================
+// REMOVE ITEM
+// ==============================
 
 
 function removeItem(index){
 
+
     cart.splice(index,1);
+
 
     updateCart();
 
-}
 
+}
 
 
 
@@ -52,7 +492,7 @@ function removeItem(index){
 
 
 // ==============================
-// CLEAR ORDER
+// CLEAR CART
 // ==============================
 
 
@@ -60,6 +500,7 @@ function clearCart(){
 
 
     cart=[];
+
 
     updateCart();
 
@@ -83,12 +524,23 @@ function setPayment(method){
     paymentMethod = method;
 
 
-    document
-    .getElementById("paymentMethod")
-    .innerText = method;
+    let display =
+    document.getElementById(
+        "paymentMethod"
+    );
+
+
+    if(display){
+
+        display.innerText = method;
+
+    }
 
 
 }
+
+
+
 
 
 
@@ -99,46 +551,49 @@ function setPayment(method){
 // ==============================
 
 
-document
-.getElementById("cashInput")
-.addEventListener(
-"input",
-calculateChange
-);
-
-
-
 function calculateChange(){
 
 
+
     let total =
+
     Number(
-    document.getElementById("total").innerText
+
+    document.getElementById(
+        "total"
+    ).innerText
+
     );
+
 
 
     let cash =
+
     Number(
-    document.getElementById("cashInput").value
+
+    document.getElementById(
+        "cashInput"
+    ).value
+
     );
 
 
 
-    let change = cash-total;
+    let change = cash - total;
+
 
 
     if(change < 0){
 
-        change=0;
+        change = 0;
 
     }
 
 
 
-    document
-    .getElementById("change")
-    .innerText =
-    change;
+    document.getElementById(
+        "change"
+    ).innerText = change;
 
 
 
@@ -148,18 +603,49 @@ function calculateChange(){
 
 
 
-// LOAD DEFAULT CATEGORY
 
-displayProducts();
+let cashBox =
+document.getElementById(
+"cashInput"
+);
+
+
+
+if(cashBox){
+
+
+cashBox.addEventListener(
+"input",
+calculateChange
+);
+
+
+}
+
+
+
+
+
+
+
+
 
 // ==============================
-// ORDER HISTORY SYSTEM
+// ORDERS
 // ==============================
 
 
 let orders = JSON.parse(
-    localStorage.getItem("orders")
+
+localStorage.getItem(
+"orders"
+
+)
+
 ) || [];
+
+
+
 
 
 
@@ -174,37 +660,67 @@ let orders = JSON.parse(
 function finishOrder(){
 
 
-    if(cart.length === 0){
 
-        alert("Cart is empty!");
+    if(cart.length===0){
+
+
+        alert(
+        "Cart is empty!"
+        );
+
 
         return;
 
+
     }
+
 
 
 
     let total =
+
     Number(
-        document.getElementById("total").innerText
+
+    document.getElementById(
+        "total"
+    ).innerText
+
     );
+
 
 
 
     let cash =
+
     Number(
-        document.getElementById("cashInput").value
+
+    document.getElementById(
+        "cashInput"
+    ).value
+
     );
 
 
 
-    if(paymentMethod === "Cash" && cash < total){
 
-        alert("Not enough cash!");
+    if(
+    paymentMethod==="Cash"
+    &&
+    cash < total
+    ){
+
+
+        alert(
+        "Not enough cash!"
+        );
+
 
         return;
 
+
     }
+
+
 
 
 
@@ -217,7 +733,9 @@ function finishOrder(){
 
 
         items:
-        JSON.parse(JSON.stringify(cart)),
+        JSON.parse(
+        JSON.stringify(cart)
+        ),
 
 
         total:total,
@@ -235,10 +753,15 @@ function finishOrder(){
 
 
         date:
-        new Date().toLocaleString()
+        new Date()
+        .toLocaleString()
+
 
 
     };
+
+
+
 
 
 
@@ -247,13 +770,15 @@ function finishOrder(){
 
 
 
+
     localStorage.setItem(
 
-        "orders",
+    "orders",
 
-        JSON.stringify(orders)
+    JSON.stringify(orders)
 
     );
+
 
 
 
@@ -262,29 +787,22 @@ function finishOrder(){
 
 
 
+
     cart=[];
-
-
-    document
-    .getElementById("cashInput")
-    .value="";
-
-
-
-    paymentMethod="None";
-
-
-    document
-    .getElementById("paymentMethod")
-    .innerText="None";
-
 
 
     updateCart();
 
 
 
-    showSaleMessage();
+
+    document.getElementById(
+    "cashInput"
+    ).value="";
+
+
+
+    paymentMethod="None";
 
 
 
@@ -296,34 +814,25 @@ function finishOrder(){
 
 
 
-// ==============================
-// RECEIPTS
-// ==============================
 
+
+// ==============================
+// RECEIPT
+// ==============================
 
 
 function showReceipt(order){
 
 
 
-    let receipt =
-    document.getElementById("receipt");
+    let text =
 
-
-
-    let text = "";
-
-
-
-    text +=
 `GAS & GO STORE
+
+--------------------
 
 `;
 
-
-
-    text +=
-"----------------------\n";
 
 
 
@@ -332,7 +841,8 @@ function showReceipt(order){
 
         text +=
 
-        `${item.name}
+`${item.name}
+
 ${item.quantity} x $${item.price}
 
 `;
@@ -342,55 +852,93 @@ ${item.quantity} x $${item.price}
 
 
 
-    text +=
-"----------------------\n";
 
 
     text +=
 
-`TOTAL: $${order.total}
+`--------------------
+
+TOTAL:
+$${order.total}
+
 
 Payment:
 ${order.payment}
+
 
 `;
 
 
 
+
+
     if(order.payment==="Cash"){
+
 
         text +=
 
 `Cash:
 $${order.cash}
 
+
 Change:
 $${order.change}
 
+
 `;
+
 
     }
 
 
 
+
     text +=
 
-`
-Thank you!
-`;
+"Thank you!";
 
 
 
-    receipt.innerText=text;
+
+
+    let receipt =
+
+    document.getElementById(
+    "receipt"
+    );
 
 
 
-    document
-    .getElementById("receiptModal")
-    .style.display="block";
+    if(receipt){
+
+
+        receipt.innerText=text;
+
+
+    }
+
+
+
+    let modal =
+
+    document.getElementById(
+    "receiptModal"
+    );
+
+
+
+    if(modal){
+
+
+        modal.style.display="block";
+
+
+    }
+
 
 
 }
+
 
 
 
@@ -400,9 +948,9 @@ Thank you!
 function closeReceipt(){
 
 
-    document
-    .getElementById("receiptModal")
-    .style.display="none";
+    document.getElementById(
+    "receiptModal"
+    ).style.display="none";
 
 
 }
@@ -414,7 +962,7 @@ function closeReceipt(){
 
 
 // ==============================
-// ORDER HISTORY VIEW
+// ORDER HISTORY
 // ==============================
 
 
@@ -423,22 +971,19 @@ function openHistory(){
 
 
     let box =
-    document.getElementById("historyList");
+
+    document.getElementById(
+    "historyList"
+    );
+
+
+
+    if(!box)
+    return;
 
 
 
     box.innerHTML="";
-
-
-
-    if(orders.length===0){
-
-
-        box.innerHTML =
-        "<p>No previous orders</p>";
-
-
-    }
 
 
 
@@ -449,42 +994,49 @@ function openHistory(){
     .forEach(order=>{
 
 
+
         let div =
-        document.createElement("div");
-
-
-        div.className =
-        "cart-item";
+        document.createElement(
+        "div"
+        );
 
 
 
-        div.innerHTML=`
+        div.className="cart-item";
 
-        <b>
-        Order #${order.id}
-        </b>
 
-        <br>
 
-        ${order.date}
+        div.innerHTML=
 
-        <br>
+`
 
-        Total:
-        $${order.total}
+<b>
+Order #${order.id}
+</b>
 
-        <br>
+<br>
 
-        Payment:
-        ${order.payment}
+${order.date}
 
-        <br><br>
+<br>
 
-        <button onclick="deleteOrder(${order.id})">
-        Delete
-        </button>
+Total:
+$${order.total}
 
-        `;
+<br>
+
+Payment:
+${order.payment}
+
+
+<button onclick="deleteOrder(${order.id})">
+
+Delete
+
+</button>
+
+
+`;
 
 
 
@@ -496,13 +1048,17 @@ function openHistory(){
 
 
 
-    document
-    .getElementById("historyModal")
-    .style.display="block";
+
+
+    document.getElementById(
+    "historyModal"
+    ).style.display="block";
+
 
 
 
 }
+
 
 
 
@@ -512,12 +1068,13 @@ function openHistory(){
 function closeHistory(){
 
 
-    document
-    .getElementById("historyModal")
-    .style.display="none";
+    document.getElementById(
+    "historyModal"
+    ).style.display="none";
 
 
 }
+
 
 
 
@@ -527,17 +1084,19 @@ function deleteOrder(id){
 
 
     orders =
+
     orders.filter(
-        order=>order.id!==id
+    order =>
+    order.id !== id
     );
 
 
 
     localStorage.setItem(
 
-        "orders",
+    "orders",
 
-        JSON.stringify(orders)
+    JSON.stringify(orders)
 
     );
 
@@ -548,449 +1107,13 @@ function deleteOrder(id){
 
 }
 
+// =====================================
+// GAS & GO POS SYSTEM
+// SCRIPT.JS PART 3
+// FUEL + BACKUP + SETTINGS
+// =====================================
 
 
-
-
-
-
-// ==============================
-// SALE MESSAGE
-// ==============================
-
-
-function showSaleMessage(){
-
-
-    let msg =
-    document.getElementById("saleMessage");
-
-
-    msg.style.display="block";
-
-
-    setTimeout(()=>{
-
-
-        msg.style.display="none";
-
-
-    },3000);
-
-
-
-}
-
-// ==============================
-// ADMIN LOGIN SYSTEM
-// ==============================
-
-
-
-document
-.getElementById("adminButton")
-.onclick=function(){
-
-    document
-    .getElementById("adminLogin")
-    .style.display="block";
-
-};
-
-
-
-
-
-
-function loginAdmin(){
-
-
-    let password =
-    document
-    .getElementById("adminPassword")
-    .value;
-
-
-
-    if(password === ADMIN_PASSWORD){
-
-
-
-        document
-        .getElementById("adminLogin")
-        .style.display="none";
-
-
-
-        document
-        .getElementById("adminPanel")
-        .style.display="block";
-
-
-
-        loadAdminProducts();
-
-
-
-    }
-    else{
-
-
-        alert("Wrong password!");
-
-    }
-
-
-
-}
-
-
-
-
-
-
-function closeAdmin(){
-
-
-    document
-    .getElementById("adminLogin")
-    .style.display="none";
-
-
-}
-
-
-
-
-
-
-function closeAdminPanel(){
-
-
-    document
-    .getElementById("adminPanel")
-    .style.display="none";
-
-
-}
-
-
-
-
-
-
-
-
-// ==============================
-// ADMIN PRODUCT LIST
-// ==============================
-
-
-
-function loadAdminProducts(){
-
-
-    let box =
-    document.getElementById("adminProducts");
-
-
-
-    box.innerHTML="";
-
-
-
-
-    products.forEach((product,index)=>{
-
-
-        let div =
-        document.createElement("div");
-
-
-
-        div.className =
-        "admin-product";
-
-
-
-        div.innerHTML = `
-
-
-        <span class="admin-name">
-
-        ${product.name}
-
-        <br>
-
-        Category:
-        ${product.category}
-
-        </span>
-
-
-
-        <input
-        type="number"
-        value="${product.price}"
-        id="price-${index}"
-        >
-
-
-
-        <button onclick="changePrice(${index})">
-
-        Save
-
-        </button>
-
-
-
-        <button onclick="deleteProduct(${index})">
-
-        Delete
-
-        </button>
-
-
-
-        `;
-
-
-
-        box.appendChild(div);
-
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-// ==============================
-// CHANGE PRICE
-// ==============================
-
-
-function changePrice(index){
-
-
-    let newPrice =
-
-    Number(
-
-    document
-    .getElementById(
-        "price-"+index
-    )
-    .value
-
-    );
-
-
-
-    if(newPrice<=0){
-
-        alert("Invalid price");
-
-        return;
-
-    }
-
-
-
-
-    products[index].price=newPrice;
-
-
-
-    saveProducts();
-
-
-    displayProducts();
-
-
-    loadAdminProducts();
-
-
-
-    alert("Price updated!");
-
-
-
-}
-
-
-
-
-
-
-
-
-// ==============================
-// DELETE PRODUCT
-// ==============================
-
-
-
-function deleteProduct(index){
-
-
-    let confirmDelete =
-    confirm(
-        "Delete this product?"
-    );
-
-
-
-    if(confirmDelete){
-
-
-        products.splice(index,1);
-
-
-
-        saveProducts();
-
-
-
-        displayProducts();
-
-
-
-        loadAdminProducts();
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-// ==============================
-// ADD PRODUCT
-// ==============================
-
-
-
-function addProduct(){
-
-
-
-    let name =
-
-    document
-    .getElementById("newProductName")
-    .value;
-
-
-
-    let price =
-
-    Number(
-
-    document
-    .getElementById("newProductPrice")
-    .value
-
-    );
-
-
-
-    let category =
-
-    document
-    .getElementById("newProductCategory")
-    .value;
-
-
-
-
-
-    if(
-        name===""
-        ||
-        price<=0
-    ){
-
-
-        alert(
-        "Enter valid information"
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-    products.push({
-
-
-        name:name,
-
-        price:price,
-
-        category:category
-
-
-    });
-
-
-
-
-
-    saveProducts();
-
-
-
-    displayProducts();
-
-
-
-    loadAdminProducts();
-
-
-
-
-
-    document
-    .getElementById("newProductName")
-    .value="";
-
-
-
-    document
-    .getElementById("newProductPrice")
-    .value="";
-
-
-
-    alert(
-    "Product added!"
-    );
-
-
-
-}
 
 // ==============================
 // FUEL CALCULATOR
@@ -1000,12 +1123,22 @@ function addProduct(){
 function openFuel(){
 
 
-    document
-    .getElementById("fuelModal")
-    .style.display="block";
+    let modal =
+    document.getElementById(
+    "fuelModal"
+    );
+
+
+    if(modal){
+
+        modal.style.display="block";
+
+    }
 
 
 }
+
+
 
 
 
@@ -1014,12 +1147,21 @@ function openFuel(){
 function closeFuel(){
 
 
-    document
-    .getElementById("fuelModal")
-    .style.display="none";
+    let modal =
+    document.getElementById(
+    "fuelModal"
+    );
+
+
+    if(modal){
+
+        modal.style.display="none";
+
+    }
 
 
 }
+
 
 
 
@@ -1031,13 +1173,13 @@ function addFuel(){
 
 
 
-    let price =
+    let fuelType =
 
     Number(
 
-    document
-    .getElementById("fuelType")
-    .value
+    document.getElementById(
+    "fuelType"
+    ).value
 
     );
 
@@ -1047,16 +1189,16 @@ function addFuel(){
 
     Number(
 
-    document
-    .getElementById("gallons")
-    .value
+    document.getElementById(
+    "gallons"
+    ).value
 
     );
 
 
 
 
-    if(gallons<=0){
+    if(gallons <= 0){
 
 
         alert(
@@ -1075,27 +1217,25 @@ function addFuel(){
 
     let fuelNames = {
 
-        749:"Regular Fuel",
 
-        829:"Plus Fuel",
+        749:
+        "Regular Fuel",
 
-        949:"Premium Fuel",
 
-        1250:"Exclusive Fuel"
+        829:
+        "Plus Fuel",
+
+
+        949:
+        "Premium Fuel",
+
+
+        1250:
+        "Exclusive Fuel"
+
+
 
     };
-
-
-
-
-
-    let name =
-
-    fuelNames[price]
-
-    ||
-
-    "Fuel";
 
 
 
@@ -1106,19 +1246,20 @@ function addFuel(){
 
         name:
 
-        `${name} (${gallons} gal)`,
-
-
-
-        price:
-
-        price,
-
-
-
-        quantity:
-
+        fuelNames[fuelType]
+        +
+        " "
+        +
         gallons
+        +
+        " gal",
+
+
+
+        price:fuelType,
+
+
+        quantity:gallons
 
 
 
@@ -1136,12 +1277,6 @@ function addFuel(){
 
 
 
-    document
-    .getElementById("gallons")
-    .value="";
-
-
-
 }
 
 
@@ -1150,100 +1285,18 @@ function addFuel(){
 
 
 
-// ==============================
-// ADMIN DATA TOOLS
-// ==============================
-
-
-
-function resetProducts(){
-
-
-    let confirmReset =
-
-    confirm(
-    "Reset all products?"
-    );
-
-
-
-    if(confirmReset){
-
-
-
-        localStorage.removeItem(
-        "products"
-        );
-
-
-        location.reload();
-
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-function clearHistory(){
-
-
-
-    let confirmClear =
-
-    confirm(
-    "Delete all orders?"
-    );
-
-
-
-    if(confirmClear){
-
-
-        orders=[];
-
-
-
-        localStorage.removeItem(
-        "orders"
-        );
-
-
-
-        alert(
-        "History cleared"
-        );
-
-
-
-    }
-
-
-}
-
-
-
-
-
 
 
 // ==============================
-// EXPORT DATA
+// EXPORT BACKUP
 // ==============================
-
 
 
 function exportData(){
 
 
 
-    let data = {
+    let backup = {
 
 
         products:products,
@@ -1252,32 +1305,47 @@ function exportData(){
         orders:orders
 
 
+
     };
 
 
 
-    let file =
 
-    new Blob(
+    let file = new Blob(
+
 
     [
-        JSON.stringify(
-        data,
-        null,
-        2
-        )
+
+    JSON.stringify(
+    backup,
+    null,
+    2
+    )
+
     ],
 
+
     {
-        type:"application/json"
+
+
+    type:
+    "application/json"
+
+
     }
+
 
     );
 
 
 
+
+
+
     let link =
-    document.createElement("a");
+    document.createElement(
+    "a"
+    );
 
 
 
@@ -1302,13 +1370,16 @@ function exportData(){
 
 
 
-// ==============================
-// IMPORT DATA
-// ==============================
 
+
+
+// ==============================
+// IMPORT BACKUP
+// ==============================
 
 
 function importData(event){
+
 
 
     let file =
@@ -1322,8 +1393,11 @@ function importData(event){
 
 
 
+
+
     let reader =
     new FileReader();
+
 
 
 
@@ -1333,26 +1407,33 @@ function importData(event){
 
 
         let data =
+
         JSON.parse(
         e.target.result
         );
 
 
 
+
+
         if(data.products){
 
 
-            products=data.products;
+            products =
+            data.products;
 
 
         }
+
+
 
 
 
         if(data.orders){
 
 
-            orders=data.orders;
+            orders =
+            data.orders;
 
 
         }
@@ -1361,7 +1442,15 @@ function importData(event){
 
 
 
-        saveProducts();
+        localStorage.setItem(
+
+        "products",
+
+        JSON.stringify(products)
+
+        );
+
+
 
 
 
@@ -1375,11 +1464,20 @@ function importData(event){
 
 
 
+
+
+        alert(
+        "Backup imported!"
+        );
+
+
+
         location.reload();
 
 
 
     };
+
 
 
 
@@ -1397,23 +1495,183 @@ function importData(event){
 
 
 
+
 // ==============================
-// CLOSE MODALS WHEN CLICKING OUTSIDE
+// STORE SETTINGS
 // ==============================
 
+
+let storeName =
+
+localStorage.getItem(
+"storeName"
+)
+
+||
+
+"Gas & Go";
+
+
+
+
+
+
+
+function changeStoreName(){
+
+
+
+    let name =
+
+    prompt(
+
+    "New store name:",
+
+    storeName
+
+    );
+
+
+
+
+
+    if(name){
+
+
+
+        storeName=name;
+
+
+
+        localStorage.setItem(
+
+        "storeName",
+
+        storeName
+
+        );
+
+
+
+        alert(
+        "Store name updated!"
+        );
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==============================
+// PRINT RECEIPT
+// ==============================
+
+
+function printReceipt(){
+
+
+
+    let receipt =
+
+    document.getElementById(
+    "receipt"
+    );
+
+
+
+    if(!receipt)
+    return;
+
+
+
+
+
+    let printWindow =
+
+    window.open(
+    "",
+    "",
+    "width=400,height=600"
+    );
+
+
+
+
+
+    printWindow.document.write(
+
+    receipt.innerHTML
+
+    );
+
+
+
+
+    printWindow.print();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==============================
+// ADMIN DASHBOARD LINK
+// ==============================
+
+
+function openAdminDashboard(){
+
+
+    window.location.href =
+    "admin.html";
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==============================
+// CLOSE MODALS
+// ==============================
 
 
 window.onclick=function(event){
 
 
+
     let modals =
+
     document.querySelectorAll(
     ".modal"
     );
 
 
 
+
     modals.forEach(modal=>{
+
 
 
         if(event.target===modal){
@@ -1425,11 +1683,20 @@ window.onclick=function(event){
         }
 
 
+
     });
 
 
 
 }
+
+// =====================================
+// GAS & GO POS SYSTEM
+// SCRIPT.JS PART 4
+// STARTUP + FINAL FIXES
+// =====================================
+
+
 
 // ==============================
 // SALES STATISTICS
@@ -1439,16 +1706,14 @@ window.onclick=function(event){
 function getSalesStats(){
 
 
-    let totalSales = 0;
-
-    let totalOrders = orders.length;
+    let revenue = 0;
 
 
 
     orders.forEach(order=>{
 
 
-        totalSales += order.total;
+        revenue += order.total;
 
 
     });
@@ -1459,11 +1724,11 @@ function getSalesStats(){
 
 
         orders:
-        totalOrders,
+        orders.length,
 
 
         revenue:
-        totalSales
+        revenue
 
 
 
@@ -1489,161 +1754,25 @@ function showStats(){
 
     alert(
 
-`📊 SALES STATISTICS
+`📊 SALES REPORT
+
 
 Orders:
 ${stats.orders}
 
+
 Revenue:
 $${stats.revenue}
 
-Average Order:
-$${
-
-stats.orders > 0
-
-?
-
-Math.round(
-stats.revenue / stats.orders
-)
-
-:
-
-0
-
-}
 
 `
 
     );
 
 
-
 }
 
 
-
-
-
-
-
-// ==============================
-// STORE SETTINGS
-// ==============================
-
-
-
-let storeName =
-
-localStorage.getItem(
-"storeName"
-)
-
-||
-
-"Gas & Go";
-
-
-
-
-
-
-function changeStoreName(){
-
-
-
-    let name =
-    prompt(
-    "Enter store name:",
-    storeName
-    );
-
-
-
-    if(name){
-
-
-        storeName=name;
-
-
-
-        localStorage.setItem(
-        "storeName",
-        storeName
-        );
-
-
-
-        alert(
-        "Store name changed"
-        );
-
-    }
-
-
-}
-
-
-
-
-
-
-
-// ==============================
-// PRINT RECEIPT
-// ==============================
-
-
-
-function printReceipt(){
-
-
-    let receipt =
-    document.getElementById(
-    "receipt"
-    ).innerHTML;
-
-
-
-    let windowPrint =
-    window.open(
-    "",
-    "",
-    "width=400,height=600"
-    );
-
-
-
-    windowPrint.document.write(
-
-    `
-
-    <html>
-
-    <body>
-
-    ${receipt}
-
-    </body>
-
-    </html>
-
-    `
-
-    );
-
-
-
-    windowPrint.print();
-
-
-
-    windowPrint.close();
-
-
-
-}
 
 
 
@@ -1656,52 +1785,54 @@ function printReceipt(){
 // ==============================
 
 
-
 document.addEventListener(
+
 "keydown",
+
 function(event){
 
 
 
-    // F1 opens admin
+    // F1 = Admin
 
     if(event.key==="F1"){
 
 
-        document
-        .getElementById(
-        "adminLogin"
-        )
-        .style.display="block";
+
+        openAdminDashboard();
+
 
 
     }
 
 
 
-
-    // ESC closes windows
+    // ESC = close modals
 
     if(event.key==="Escape"){
 
 
+
         document
-        .querySelectorAll(
-        ".modal"
-        )
-        .forEach(
-        modal=>{
+        .querySelectorAll(".modal")
+        .forEach(modal=>{
+
 
             modal.style.display="none";
 
+
         });
+
 
 
     }
 
 
 
-});
+}
+
+);
+
 
 
 
@@ -1711,9 +1842,8 @@ function(event){
 
 
 // ==============================
-// STARTUP LOAD
+// START SYSTEM
 // ==============================
-
 
 
 function startup(){
@@ -1737,9 +1867,3 @@ function startup(){
 
 
 startup();
-
-function openAdminDashboard(){
-
-    window.location.href = "admin.html";
-
-}
