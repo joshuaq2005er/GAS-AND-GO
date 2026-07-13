@@ -110,29 +110,53 @@ MAIN POS LAYOUT
 
 .pos-container {
 
+    display:flex;
 
-    display:grid;
-
-
-    grid-template-columns:
-
-    220px
-
-    1fr
-
-    350px;
-
-
+    flex-direction:row;
 
     gap:15px;
 
-
     padding:15px;
 
+    width:100%;
 
+    align-items:flex-start;
 
 }
 
+
+
+
+
+.category-panel {
+
+    width:220px;
+
+    flex-shrink:0;
+
+}
+
+
+
+
+
+.products-panel {
+
+    flex:1;
+
+}
+
+
+
+
+
+.cart-panel {
+
+    width:350px;
+
+    flex-shrink:0;
+
+}
 
 
 
@@ -142,16 +166,11 @@ MAIN POS LAYOUT
 .products-panel,
 .cart-panel {
 
-
     background:#1b1b1b;
-
 
     padding:15px;
 
-
     border-radius:10px;
-
-
 
 }
 
@@ -231,105 +250,58 @@ button:hover {
 /* =========================
 PRODUCT AREA
 ========================= */
-
-
 #products {
-
 
     display:grid;
 
-
     grid-template-columns:
-
-
     repeat(auto-fill,minmax(150px,1fr));
-
-
 
     gap:10px;
 
-
-
 }
-
-
-
-
 
 
 .product {
 
-
     background:#242424;
-
 
     padding:15px;
 
-
     border-radius:10px;
-
 
     cursor:pointer;
 
-
     text-align:center;
 
-
-
 }
-
-
 
 
 .product:hover {
 
-
     background:#333;
 
-
 }
-
-
-
 
 
 .product-name {
 
-
     display:block;
-
 
     font-size:17px;
 
-
-
 }
-
-
-
 
 
 .product-price {
 
-
     display:block;
-
 
     color:#00ff88;
 
-
     margin-top:5px;
 
-
-
 }
-
-
-
-
-
-
-
 
 /* =========================
 CART
