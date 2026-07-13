@@ -358,22 +358,19 @@ CART
 
 }
 
-
-
-
-
 .cart-item button {
 
+    padding:8px 14px;
 
-    padding:5px 10px;
+    margin:5px;
 
+    display:inline-block;
 
+    min-width:35px;
+
+    font-size:18px;
 
 }
-
-
-
-
 
 
 /* =========================
