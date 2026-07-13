@@ -291,10 +291,7 @@ function addToCart(product){
 function updateCart(){
 
 
-    let box =
-    document.getElementById(
-        "cart"
-    );
+    let box = document.getElementById("cart");
 
 
     if(!box)
@@ -312,36 +309,81 @@ function updateCart(){
     cart.forEach((item,index)=>{
 
 
-        total +=
-        item.price *
-        item.quantity;
+        total += item.price * item.quantity;
 
 
 
-        let div =
-        document.createElement("div");
-
+        let div = document.createElement("div");
 
 
         div.className="cart-item";
 
 
 
-        div.innerHTML=
+        div.innerHTML = `
 
-        `
 
+        <b>
         ${item.name}
+        </b>
+
 
         <br>
 
-        ${item.quantity} x $${item.price}
+
+        Price:
+        $${item.price}
+
+
+
+        <br><br>
+
+
+
+        <button onclick="decreaseQuantity(${index})">
+
+        -
+
+        </button>
+
+
+
+        <span style="padding:10px">
+
+        ${item.quantity}
+
+        </span>
+
+
+
+        <button onclick="increaseQuantity(${index})">
+
+        +
+
+        </button>
+
+
+
+        <br><br>
+
+
+
+        Subtotal:
+        $${item.price * item.quantity}
+
+
+
+        <br><br>
+
+
 
         <button onclick="removeItem(${index})">
 
-        ❌
+        🗑 Remove
 
         </button>
+
+
 
         `;
 
@@ -350,20 +392,17 @@ function updateCart(){
         box.appendChild(div);
 
 
+
     });
 
 
 
 
-    document.getElementById(
-        "total"
-    ).innerText =
-    total;
+    document.getElementById("total").innerText = total;
 
 
 
 }
-
 // =====================================
 // GAS & GO POS SYSTEM
 // SCRIPT.JS PART 2
