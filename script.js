@@ -1738,3 +1738,8 @@ function startup(){
 
 startup();
 
+function openAdminDashboard(){
+
+    window.location.href = "admin.html";
+
+}
