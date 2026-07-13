@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gas & Go Admin</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+
+<div id="loginBox" class="modal-content">
+
+
+<h1>
+🔐 Admin Login
+</h1>
+
+
+<input
+type="password"
+id="password"
+placeholder="Admin Password"
+>
+
+
+<button onclick="adminLogin()">
+Login
+</button>
+
+
+<p id="loginError"></p>
+
+
+</div>
+
+
+
+
+
+
+<div id="dashboard" style="display:none;">
+
+
+
+<header>
+
+<h1>
+⚙ Gas & Go Admin Dashboard
+</h1>
+
+
+<button onclick="location.href='index.html'">
+⬅ Back To Register
+</button>
+
+
+</header>
+
+
+
+
+
+<div class="container">
+
+
+
+
+
+<section>
+
+
+<h2>
+➕ Add Product
+</h2>
+
+
+<input
+id="productName"
+placeholder="Product Name"
+>
+
+
+<input
+id="productPrice"
+type="number"
+placeholder="Price"
+>
+
+
+
+<select id="productCategory">
+
+
+<option>
+Cold Drinks
+</option>
+
+<option>
+Energy Drinks
+</option>
+
+<option>
+Snacks
+</option>
+
+<option>
+Hot Food
+</option>
+
+<option>
+Extras
+</option>
+
+<option>
+Gas
+</option>
+
+
+</select>
+
+
+
+<button onclick="addAdminProduct()">
+
+Add Product
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+
+<h2>
+📦 Products
+</h2>
+
+
+<div id="adminProductList">
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+
+<h2>
+📜 Order History
+</h2>
+
+
+<div id="orders">
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+
+<h2>
+📊 Statistics
+</h2>
+
+
+<div id="stats">
+
+</div>
+
+
+</section>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<script src="admin.js"></script>
+
+
+</body>
+
+</html>
