@@ -488,99 +488,106 @@ function deleteProduct(index){
 // ORDERS
 // =======================================
 
-
 function loadOrders(){
-
-
 
     let box =
     document.getElementById("orders");
 
+    box.innerHTML = "";
 
-    box.innerHTML="";
+    let searchBox =
+    document.getElementById("orderSearch");
 
+    let search = "";
 
+    if(searchBox){
+        search = searchBox.value.toLowerCase();
+    }
 
     orders
     .slice()
     .reverse()
-    .forEach(order=>{
+    .filter(order=>{
 
+        return (
+
+            (order.customerUsername || "")
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            (order.customerID || "")
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            order.items.some(item=>
+
+                item.name
+                .toLowerCase()
+                .includes(search)
+
+            )
+
+        );
+
+    })
+    .forEach(order=>{
 
         let div =
         document.createElement("div");
 
+        div.className="cart-item";
 
-        div.className =
-        "cart-item";
+        div.innerHTML = `
 
+<b>Order #${order.id}</b>
 
+<br>
 
-        div.innerHTML=`
+${order.date}
 
-        <b>
-        Order #${order.id}
-        </b>
+<br><br>
 
-        <br>
+<b>Customer:</b>
+${order.customerUsername}
 
-        ${order.date}
+<br>
 
-        <br>
+<b>User ID:</b>
+${order.customerID || "None"}
 
-        Total:
-        $${order.total}
+<br>
 
-        <br>
+<b>Items:</b>
 
-        Payment:
-        ${order.payment}
+${order.items.map(item=>item.name).join(", ")}
 
-        `;
+<br>
 
+<b>Total:</b>
+$${order.total}
 
+<br>
+
+<b>Payment:</b>
+${order.payment}
+
+<br>
+
+<b>Proof:</b>
+${order.proof}
+
+`;
 
         box.appendChild(div);
 
-
     });
 
-
 }
 
-
-
-
-
-
-
-function clearOrders(){
-
-
-    if(confirm(
-    "Delete all orders?"
-    )){
-
-
-        orders=[];
-
-
-        localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
-        );
-
-
-        loadOrders();
-
-
-        loadDashboard();
-
-
-    }
-
-
-}
 // =======================================
 // ANALYTICS
 // =======================================
