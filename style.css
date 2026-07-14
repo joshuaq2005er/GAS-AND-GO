@@ -216,7 +216,15 @@ MAIN POS LAYOUT
 /* =========================
 CATEGORY BUTTONS
 ========================= */
+.category-panel button.active-category {
 
+    background:#444;
+
+    border-left:4px solid #00ff88;
+
+    box-shadow:0 0 8px rgba(0,255,136,0.35);
+
+}
 
 .category-panel button {
 
