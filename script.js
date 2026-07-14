@@ -155,6 +155,10 @@ let currentCategory = "Cold Drinks";
 
 let paymentMethod = "None";
 
+let discount = 0;
+let discountType = "none"; // "none", "preset", "code"
+let discountReason = "";
+
 
 
 
@@ -430,14 +434,14 @@ function updateCart(){
     box.innerHTML="";
 
 
-    let total=0;
+    let subtotal=0;
 
 
 
     cart.forEach((item,index)=>{
 
 
-        total += item.price * item.quantity;
+        subtotal += item.price * item.quantity;
 
 
 
@@ -524,9 +528,14 @@ function updateCart(){
     });
 
 
+    let total = subtotal;
+    
+    if(discount > 0){
+        total = subtotal - (subtotal * discount / 100);
+    }
 
-
-    document.getElementById("total").innerText = total;
+    document.getElementById("subtotal").innerText = subtotal;
+    document.getElementById("total").innerText = Math.round(total);
 
 
 
@@ -534,7 +543,7 @@ function updateCart(){
 // =====================================
 // GAS & GO POS SYSTEM
 // SCRIPT.JS PART 2
-// CHECKOUT + RECEIPTS + HISTORY
+// CHECKOUT + RECEIPTS + HISTORY + DISCOUNTS
 // =====================================
 
 
@@ -596,9 +605,13 @@ function clearCart(){
 
 
     cart=[];
+    discount = 0;
+    discountType = "none";
+    discountReason = "";
 
 
     updateCart();
+    updateDiscountDisplay();
 
 
 }
@@ -710,6 +723,85 @@ calculateChange
 }
 
 
+// ==============================
+// DISCOUNT SYSTEM
+// ==============================
+
+let usedCodes = JSON.parse(
+    localStorage.getItem("usedCodes")
+) || [];
+
+function setPresetDiscount(percentage, reason){
+    discount = percentage;
+    discountType = "preset";
+    discountReason = reason;
+    updateCart();
+    updateDiscountDisplay();
+}
+
+function updateDiscountDisplay(){
+    let discountDisplay = document.getElementById("discountDisplay");
+    if(!discountDisplay) return;
+    
+    if(discount > 0){
+        discountDisplay.innerHTML = `
+            <b>💰 Discount Applied: ${discount}% (${discountReason})</b><br>
+            <button onclick="clearDiscount()">Remove Discount</button>
+        `;
+    }
+    else{
+        discountDisplay.innerHTML = "";
+    }
+}
+
+function clearDiscount(){
+    discount = 0;
+    discountType = "none";
+    discountReason = "";
+    updateCart();
+    updateDiscountDisplay();
+}
+
+function applyDiscountCode(){
+    let code = document.getElementById("discountCodeInput").value.trim().toUpperCase();
+    
+    if(!code){
+        alert("Please enter a discount code");
+        return;
+    }
+    
+    // Check if code was already used
+    if(usedCodes.includes(code)){
+        alert("This discount code has already been used!");
+        return;
+    }
+    
+    // Get all discount codes from localStorage
+    let allCodes = JSON.parse(localStorage.getItem("discountCodes")) || [];
+    let codeObj = allCodes.find(c => c.code === code);
+    
+    if(!codeObj){
+        alert("Invalid discount code");
+        return;
+    }
+    
+    if(!codeObj.active){
+        alert("This discount code has been deactivated");
+        return;
+    }
+    
+    // Apply discount
+    discount = codeObj.percentage;
+    discountType = "code";
+    discountReason = codeObj.description || "Discount Code";
+    updateCart();
+    updateDiscountDisplay();
+    
+    document.getElementById("discountCodeInput").value = "";
+    alert(`Discount applied! ${codeObj.percentage}% off`);
+}
+
+
 
 
 // ==============================
@@ -769,9 +861,16 @@ function finishOrder(){
     }
 
 
-    let total = Number(
-        document.getElementById("total").innerText
-    );
+    let subtotal = 0;
+    cart.forEach(item => {
+        subtotal += item.price * item.quantity;
+    });
+
+    let total = subtotal;
+    if(discount > 0){
+        total = subtotal - (subtotal * discount / 100);
+    }
+    total = Math.round(total);
 
     let cash = Number(
         document.getElementById("cashInput").value
@@ -804,6 +903,12 @@ function finishOrder(){
             JSON.stringify(cart)
         ),
 
+        subtotal:subtotal,
+        
+        discount:discount,
+        
+        discountReason:discountReason,
+
         total:total,
 
         payment:paymentMethod,
@@ -823,14 +928,24 @@ function finishOrder(){
         "orders",
         JSON.stringify(orders)
     );
+    
+    // Mark code as used if it was a one-time code
+    if(discountType === "code"){
+        usedCodes.push(/*discount code here - will be updated in admin*/);
+        localStorage.setItem("usedCodes", JSON.stringify(usedCodes));
+    }
 
 
     showReceipt(order);
 
 
     cart=[];
+    discount = 0;
+    discountType = "none";
+    discountReason = "";
 
     updateCart();
+    updateDiscountDisplay();
 
 
     document.getElementById("cashInput").value="";
@@ -885,7 +1000,21 @@ ${item.quantity} x $${item.price}
 
 `--------------------
 
-TOTAL:
+Subtotal:
+$${order.subtotal}
+
+`;
+
+    if(order.discount > 0){
+        text += `Discount: -${order.discount}% (${order.discountReason})
+$${Math.round(order.subtotal * order.discount / 100)}
+
+`;
+    }
+
+    text +=
+
+`TOTAL:
 $${order.total}
 
 Payment:
@@ -989,10 +1118,10 @@ ${order.items.map(item=>item.name).join(", ")}
 
 <br>
 
-<b>Proof:</b>
-${order.proof}
+<b>Subtotal:</b>
+$${order.subtotal}
 
-<br>
+${order.discount > 0 ? `<br><b>Discount:</b> -${order.discount}% (${order.discountReason})<br>` : ""}
 
 <b>Total:</b>
 $${order.total}
@@ -1001,6 +1130,11 @@ $${order.total}
 
 <b>Payment:</b>
 ${order.payment}
+
+<br>
+
+<b>Proof:</b>
+${order.proof}
 
 <br><br>
 
