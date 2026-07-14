@@ -65,6 +65,7 @@ let products = [
 {name:"Pringles Sour Cream",price:260,category:"Snacks"},
 {name:"Pringles Hot & Spicy",price:275,category:"Snacks"},
 
+{name:"Oreos",price:150,category:"Snacks"},
 {name:"Snickers",price:175,category:"Snacks"},
 {name:"Twix",price:175,category:"Snacks"},
 {name:"KitKat",price:180,category:"Snacks"},
@@ -115,6 +116,13 @@ let products = [
 {name:"Premium Fuel",price:949,category:"Gas"},
 {name:"Exclusive Fuel",price:1250,category:"Gas"},
 
+/* =========================
+⛽ Electric
+========================= */
+{name:"Regular Electric Charge",price:629,category:"Gas"},
+{name:"Plus Electric Charge",price:739,category:"Gas"},
+{name:"Premium Electric Charge",price:819,category:"Gas"},
+{name:"Exclusive Electric Charge",price:929,category:"Gas"},
 
 /* =========================
 🚗 CAR WASH
