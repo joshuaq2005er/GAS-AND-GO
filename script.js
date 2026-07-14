@@ -12,7 +12,7 @@ let savedProducts = JSON.parse(
     localStorage.getItem("products")
 ) || [];
 
-
+let discountCodeUsed = "";
 let products = [
 /* =========================
 🥤 COLD DRINKS
@@ -772,6 +772,7 @@ function clearDiscount(){
 
 function applyDiscountCode(){
     let code = document.getElementById("discountCodeInput").value.trim().toUpperCase();
+    discountCodeUsed = code;
     
     if(!code){
         alert("Please enter a discount code");
@@ -914,14 +915,15 @@ total = Math.round(total);
         items:JSON.parse(
             JSON.stringify(cart)
         ),
-
-        subtotal:subtotal,
+        subtotal: subtotal,
         
-        discount:discount,
+        discount: discount,
         
-        discountReason:discountReason,
-
-        total:total,
+        discountAmount: discountAmount,
+        
+        discountReason: discountReason,
+        
+        total: total,
 
         payment:paymentMethod,
 
@@ -942,11 +944,17 @@ total = Math.round(total);
     );
     
     // Mark code as used if it was a one-time code
-    if(discountType === "code"){
-        usedCodes.push(/*discount code here - will be updated in admin*/);
-        localStorage.setItem("usedCodes", JSON.stringify(usedCodes));
-    }
 
+    if(discountType === "code"){
+
+    usedCodes.push(discountCodeUsed);
+
+    localStorage.setItem(
+        "usedCodes",
+        JSON.stringify(usedCodes)
+    );
+
+}
 
     showReceipt(order);
 
