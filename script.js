@@ -626,162 +626,115 @@ localStorage.getItem(
 // FINISH ORDER
 // ==============================
 
-
 function finishOrder(){
-
-
 
     if(cart.length===0){
 
-
-        alert(
-        "Cart is empty!"
-        );
-
-
+        alert("Cart is empty!");
         return;
-
 
     }
 
 
+    let username =
+    document.getElementById("customerUsername").value.trim();
+
+    let customerID =
+    document.getElementById("customerID").value.trim();
+
+    let proofFile =
+    document.getElementById("proofImage").files[0];
 
 
-    let total =
+    if(username===""){
 
-    Number(
+        alert("Customer username is required.");
+        return;
 
-    document.getElementById(
-        "total"
-    ).innerText
+    }
 
+
+    if(!proofFile){
+
+        alert("Please attach a proof screenshot.");
+        return;
+
+    }
+
+
+    let total = Number(
+        document.getElementById("total").innerText
     );
 
-
-
-
-    let cash =
-
-    Number(
-
-    document.getElementById(
-        "cashInput"
-    ).value
-
+    let cash = Number(
+        document.getElementById("cashInput").value
     );
-
-
 
 
     if(
-    paymentMethod==="Cash"
-    &&
-    cash < total
+        paymentMethod==="Cash"
+        &&
+        cash < total
     ){
 
-
-        alert(
-        "Not enough cash!"
-        );
-
-
+        alert("Not enough cash!");
         return;
 
-
     }
-
-
-
-
 
 
     let order = {
 
+        id:Date.now(),
 
-        id:
-        Date.now(),
+        customerUsername:username,
 
+        customerID:customerID,
 
-        items:
-        JSON.parse(
-        JSON.stringify(cart)
+        proof:proofFile.name,
+
+        items:JSON.parse(
+            JSON.stringify(cart)
         ),
-
 
         total:total,
 
-
-        payment:
-        paymentMethod,
-
+        payment:paymentMethod,
 
         cash:cash,
 
+        change:cash-total,
 
-        change:
-        cash-total,
-
-
-        date:
-        new Date()
-        .toLocaleString()
-
-
+        date:new Date().toLocaleString()
 
     };
 
 
-
-
-
-
-
     orders.push(order);
 
-
-
-
     localStorage.setItem(
-
-    "orders",
-
-    JSON.stringify(orders)
-
+        "orders",
+        JSON.stringify(orders)
     );
-
-
-
 
 
     showReceipt(order);
 
 
-
-
     cart=[];
-
 
     updateCart();
 
 
-
-
-    document.getElementById(
-    "cashInput"
-    ).value="";
-
-
+    document.getElementById("cashInput").value="";
+    document.getElementById("customerUsername").value="";
+    document.getElementById("customerID").value="";
+    document.getElementById("proofImage").value="";
 
     paymentMethod="None";
-
-
+    document.getElementById("paymentMethod").innerText="None";
 
 }
-
-
-
-
-
 
 
 
@@ -790,10 +743,7 @@ function finishOrder(){
 // RECEIPT
 // ==============================
 
-
 function showReceipt(order){
-
-
 
     let text =
 
@@ -801,27 +751,27 @@ function showReceipt(order){
 
 --------------------
 
+Customer:
+${order.customerUsername}
+
+Customer ID:
+${order.customerID || "None"}
+
+--------------------
+
 `;
-
-
 
 
     order.items.forEach(item=>{
 
-
         text +=
-
 `${item.name}
 
 ${item.quantity} x $${item.price}
 
 `;
 
-
     });
-
-
-
 
 
     text +=
@@ -831,102 +781,53 @@ ${item.quantity} x $${item.price}
 TOTAL:
 $${order.total}
 
-
 Payment:
 ${order.payment}
-
 
 `;
 
 
-
-
-
     if(order.payment==="Cash"){
-
 
         text +=
 
 `Cash:
 $${order.cash}
 
-
 Change:
 $${order.change}
 
-
 `;
 
-
     }
-
-
 
 
     text +=
 
-"Thank you!";
+`--------------------
+
+Proof:
+${order.proof}
+
+Thank you!`;
 
 
+    document.getElementById("receipt").innerText=text;
 
-
-
-    let receipt =
-
-    document.getElementById(
-    "receipt"
-    );
-
-
-
-    if(receipt){
-
-
-        receipt.innerText=text;
-
-
-    }
-
-
-
-    let modal =
-
-    document.getElementById(
-    "receiptModal"
-    );
-
-
-
-    if(modal){
-
-
-        modal.style.display="block";
-
-
-    }
-
-
+    document.getElementById("receiptModal").style.display="block";
 
 }
-
-
-
 
 
 
 
 function closeReceipt(){
 
-
     document.getElementById(
-    "receiptModal"
+        "receiptModal"
     ).style.display="none";
 
-
 }
-
-
-
 
 
 
@@ -935,27 +836,12 @@ function closeReceipt(){
 // ORDER HISTORY
 // ==============================
 
-
 function openHistory(){
 
-
-
     let box =
-
-    document.getElementById(
-    "historyList"
-    );
-
-
-
-    if(!box)
-    return;
-
-
+    document.getElementById("historyList");
 
     box.innerHTML="";
-
-
 
 
     orders
@@ -963,41 +849,53 @@ function openHistory(){
     .reverse()
     .forEach(order=>{
 
-
-
         let div =
-        document.createElement(
-        "div"
-        );
-
-
+        document.createElement("div");
 
         div.className="cart-item";
-
-
 
         div.innerHTML=
 
 `
 
-<b>
-Order #${order.id}
-</b>
+<b>Order #${order.id}</b>
 
 <br>
 
 ${order.date}
 
+<br><br>
+
+<b>Customer:</b>
+${order.customerUsername}
+
 <br>
 
-Total:
+<b>User ID:</b>
+${order.customerID || "None"}
+
+<br>
+
+<b>Items:</b>
+
+${order.items.map(item=>item.name).join(", ")}
+
+<br>
+
+<b>Proof:</b>
+${order.proof}
+
+<br>
+
+<b>Total:</b>
 $${order.total}
 
 <br>
 
-Payment:
+<b>Payment:</b>
 ${order.payment}
 
+<br><br>
 
 <button onclick="deleteOrder(${order.id})">
 
@@ -1005,75 +903,45 @@ Delete
 
 </button>
 
-
 `;
 
-
-
         box.appendChild(div);
-
-
 
     });
 
 
-
-
-
     document.getElementById(
-    "historyModal"
+        "historyModal"
     ).style.display="block";
 
-
-
-
 }
-
-
-
 
 
 
 
 function closeHistory(){
 
-
     document.getElementById(
-    "historyModal"
+        "historyModal"
     ).style.display="none";
-
 
 }
 
 
 
 
-
-
 function deleteOrder(id){
 
-
-    orders =
-
-    orders.filter(
-    order =>
-    order.id !== id
+    orders = orders.filter(
+        order => order.id !== id
     );
-
-
 
     localStorage.setItem(
-
-    "orders",
-
-    JSON.stringify(orders)
-
+        "orders",
+        JSON.stringify(orders)
     );
 
-
-
     openHistory();
-
 
 }
 
