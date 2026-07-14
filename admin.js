@@ -23,7 +23,8 @@ const presetDiscounts = [
   { name: "Florida Highway Patrol", discount: 15 },
   { name: "Hillsborough County Sheriff's Office", discount: 15 },
   { name: "Tampa Police Department", discount: 20 },
-  { name: "Fire Department / EMS", discount: 20 }
+  { name: "Fire Department / EMS", discount: 20 },
+  { name: "Employee", discount: 25 }
 ];
 
 
