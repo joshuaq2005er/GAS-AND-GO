@@ -874,11 +874,15 @@ function finishOrder(){
         subtotal += item.price * item.quantity;
     });
 
-    let total = subtotal;
-    if(discount > 0){
-        total = subtotal - (subtotal * discount / 100);
-    }
-    total = Math.round(total);
+let discountAmount = 0;
+let total = subtotal;
+
+if(discount > 0){
+    discountAmount = Math.round(subtotal * discount / 100);
+    total = subtotal - discountAmount;
+}
+
+total = Math.round(total);
 
     let cash = Number(
         document.getElementById("cashInput").value
@@ -968,6 +972,16 @@ function finishOrder(){
 
 
 
+function setPresetDiscount(percentage, reason){
+
+    discount = percentage;
+    discountType = "preset";
+    discountReason = reason;
+
+    updateCart();
+    updateDiscountDisplay();
+
+}
 
 // ==============================
 // RECEIPT
