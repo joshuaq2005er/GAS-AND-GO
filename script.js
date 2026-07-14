@@ -873,24 +873,19 @@ function finishOrder(){
     let customerID =
     document.getElementById("customerID").value.trim();
 
-    let proofFile =
-    document.getElementById("proofImage").files[0];
+let proofFile =
+document.getElementById("proofImage").files[0];
+
+let proofName =
+proofFile ? proofFile.name : "No Proof Provided";
 
 
-    if(username===""){
+if(username===""){
 
-        alert("Customer username is required.");
-        return;
+    alert("Customer username is required.");
+    return;
 
-    }
-
-
-    if(!proofFile){
-
-        alert("Please attach a proof screenshot.");
-        return;
-
-    }
+}
 
 
     let subtotal = 0;
@@ -932,9 +927,9 @@ total = Math.round(total);
         customerUsername:username,
 
         customerID:customerID,
-
-        proof:proofFile.name,
-
+        
+        proof:proofName,
+        
         items:JSON.parse(
             JSON.stringify(cart)
         ),
