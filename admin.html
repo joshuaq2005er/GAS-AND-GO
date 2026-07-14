@@ -105,13 +105,12 @@ Login
 </button>
 
 
-<button onclick="openTab('discountsTab')">
-🎟 Discounts
-</button>
-
-
 <button onclick="openTab('analyticsTab')">
 📊 Analytics
+</button>
+
+<button onclick="openTab('discountsTab')">
+💰 Discounts
 </button>
 
 
@@ -329,53 +328,6 @@ oninput="loadOrders()"
 
 
 
-<!-- DISCOUNTS -->
-
-<section id="discountsTab" class="admin-tab" style="display:none;">
-
-<h2>🎟 Discount Management</h2>
-
-<div class="discount-section">
-  <h3>📋 Create Custom Discount Code (One-Time Use)</h3>
-  
-  <input 
-    id="discountCode" 
-    placeholder="Enter Code (e.g., SAVE50)"
-    maxlength="20"
-  >
-  
-  <input 
-    id="discountPercent" 
-    type="number" 
-    placeholder="Discount %" 
-    min="1" 
-    max="100"
-  >
-  
-  <button onclick="createDiscountCode()">
-    ➕ Create Code
-  </button>
-</div>
-
-<hr>
-
-<div class="discount-section">
-  <h3>🔑 Active Discount Codes</h3>
-  <div id="discountCodesList"></div>
-</div>
-
-<hr>
-
-<div class="discount-section">
-  <h3>👮 Pre-Set Discounts (Staff)</h3>
-  <div id="presetDiscountsList"></div>
-</div>
-
-</section>
-
-
-
-
 <!-- ANALYTICS -->
 
 
@@ -398,7 +350,55 @@ oninput="loadOrders()"
 
 </section>
 
+<!-- DISCOUNTS -->
 
+<section id="discountsTab" class="admin-tab" style="display:none;">
+
+
+<h2>
+💰 Discount Code Management
+</h2>
+
+
+<h3>
+Create New Discount Code
+</h3>
+
+<input
+id="newCodeInput"
+placeholder="Code (e.g., NEWYEAR25)"
+maxlength="20"
+>
+
+<input
+id="newCodePercentage"
+type="number"
+placeholder="Discount %"
+min="1"
+max="100"
+>
+
+<input
+id="newCodeDescription"
+placeholder="Description (e.g., Employee Discord)"
+>
+
+<button onclick="createDiscountCode()">
++ Create Code
+</button>
+
+<hr>
+
+<h3>
+Active Discount Codes
+</h3>
+
+<div id="discountCodesList">
+
+</div>
+
+
+</section>
 
 <!-- SETTINGS -->
 
@@ -439,11 +439,6 @@ onchange="importData(event)"
 
 
 </div>
-
-
-</div>
-
-
 
 
 </div>
