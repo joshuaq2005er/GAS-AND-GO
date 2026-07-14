@@ -42,10 +42,18 @@ class="admin-btn">
 
 
 </header>
+    
+<div>
+Subtotal: $<span id="subtotal">0</span>
+</div>
 
+<div>
+Discount: -$<span id="discountAmount">0</span>
+</div>
 
-
-
+<div>
+TOTAL: $<span id="total">0</span>
+</div>
 
 <!-- POS MAIN WINDOW -->
 
@@ -124,7 +132,25 @@ Categories
 
 </div>
 
+<button onclick="setPresetDiscount(15,'Florida Highway Patrol')">
+Florida Highway Patrol 15%
+</button>
 
+<button onclick="setPresetDiscount(15,'Hillsborough County Sheriff Office')">
+HCSO 15%
+</button>
+
+<button onclick="setPresetDiscount(20,'Tampa Police Department')">
+Tampa Police Department 20%
+</button>
+
+<button onclick="setPresetDiscount(20,'Fire Department / EMS')">
+Fire Department / EMS 20%
+</button>
+
+<button onclick="setPresetDiscount(25,'Employee Discount')">
+Employee Discount 25%
+</button>
 
 
 <!-- PRODUCTS PANEL -->
