@@ -346,14 +346,25 @@ function changeCategory(category){
 
     currentCategory = category;
 
-    console.log(
-        products.filter(product => product.category === category)
-    );
-
     displayProducts();
 
-}
 
+    document
+    .querySelectorAll(".category-panel button")
+    .forEach(button=>{
+
+        button.classList.remove(
+            "active-category"
+        );
+
+    });
+
+
+    event.target.classList.add(
+        "active-category"
+    );
+
+}
 // ==============================
 // CART FUNCTIONS
 // ==============================
