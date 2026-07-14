@@ -8,10 +8,12 @@
 // PRODUCTS DATABASE
 // ==============================
 
-let products = JSON.parse(
+let savedProducts = JSON.parse(
     localStorage.getItem("products")
-) || [
+) || [];
 
+
+let products = [
 /* =========================
 🥤 COLD DRINKS
 ========================= */
@@ -116,9 +118,13 @@ let products = JSON.parse(
 
 {name:"Normal Car Wash (Outside)",price:650,category:"Gas"},
 {name:"Deluxe Car Wash (Inside + Outside)",price:1250,category:"Gas"}
-
 ];
 
+
+products = [
+    ...products,
+    ...savedProducts
+];
 
 
 
@@ -160,15 +166,11 @@ function displayProducts(){
 
 
 
-    products
-
-    .filter(product =>
-
-        product.category === currentCategory
-
-    )
-
-    .forEach((product,index)=>{
+   products
+.filter(product => 
+    product.category === currentCategory
+)
+.forEach((product,index)=>{
 
 
         let button =
