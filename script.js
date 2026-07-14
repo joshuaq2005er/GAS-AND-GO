@@ -928,23 +928,6 @@ function closeHistory(){
 }
 
 
-
-
-function deleteOrder(id){
-
-    orders = orders.filter(
-        order => order.id !== id
-    );
-
-    localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
-    );
-
-    openHistory();
-
-}
-
 // =====================================
 // GAS & GO POS SYSTEM
 // SCRIPT.JS PART 3
