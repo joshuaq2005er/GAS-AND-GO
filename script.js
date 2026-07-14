@@ -212,26 +212,17 @@ function displayProducts(){
 
 }
 
-
-
-
-
 function changeCategory(category){
 
+    currentCategory = category;
 
-    currentCategory=category;
-
+    console.log(
+        products.filter(product => product.category === category)
+    );
 
     displayProducts();
 
-
 }
-
-
-
-
-
-
 
 // ==============================
 // CART FUNCTIONS
