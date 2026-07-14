@@ -76,6 +76,10 @@ let products = [
 {name:"Beef Jerky",price:450,category:"Snacks"},
 {name:"Luxury Chocolate Bar",price:300,category:"Snacks"},
 
+{name:"Protien Bar",price:150,category:"Snacks"},
+{name:"Donut",price:100,category:"Snacks"},
+{name:"Dozen Donut",price:1200,category:"Snacks"},
+
 
 /* =========================
 🌭 HOT FOOD
