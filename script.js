@@ -123,7 +123,11 @@ let products = [
 
 products = [
     ...products,
-    ...savedProducts
+    ...savedProducts.filter(saved =>
+        !products.some(product =>
+            product.name === saved.name
+        )
+    )
 ];
 
 
