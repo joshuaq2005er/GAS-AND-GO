@@ -877,38 +877,3 @@ function importData(event){
 
 
 }
-
-
-
-
-
-
-
-
-
-// =======================================
-// RESET SYSTEM
-// =======================================
-
-
-function resetEverything(){
-
-
-
-    if(confirm(
-    "WARNING: Delete ALL products and orders?"
-    )){
-
-
-        localStorage.clear();
-
-
-        location.reload();
-
-
-
-    }
-
-
-
-}
