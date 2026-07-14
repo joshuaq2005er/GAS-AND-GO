@@ -890,3 +890,16 @@ MOBILE SUPPORT
 .cart-panel {
     order:3;
 }
+
+.highlight-product {
+
+    background:white !important;
+
+    color:black !important;
+
+    box-shadow:
+    0 0 20px white;
+
+    transition:0.3s;
+
+}
