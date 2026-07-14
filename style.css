@@ -144,8 +144,11 @@ MAIN POS LAYOUT
 
     flex:1;
 
-}
+    max-height:80vh;
 
+    overflow-y:auto;
+
+}
 
 
 
@@ -259,8 +262,9 @@ PRODUCT AREA
 
     gap:10px;
 
-}
+    padding-right:5px;
 
+}
 
 .product {
 
