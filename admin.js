@@ -14,6 +14,18 @@ JSON.parse(localStorage.getItem("products")) || [];
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
 
+let discountCodes =
+JSON.parse(localStorage.getItem("discountCodes")) || [];
+
+
+// Pre-set staff discounts
+const presetDiscounts = [
+  { name: "Florida Highway Patrol", discount: 15 },
+  { name: "Hillsborough County Sheriff's Office", discount: 15 },
+  { name: "Tampa Police Department", discount: 20 },
+  { name: "Fire Department / EMS", discount: 20 }
+];
+
 
 
 
@@ -60,7 +72,6 @@ function adminLogin(){
 
 
 
-
 function logoutAdmin(){
 
 
@@ -68,9 +79,6 @@ function logoutAdmin(){
 
 
 }
-
-
-
 
 
 
@@ -118,6 +126,14 @@ function openTab(tab){
 
 
 
+    if(tab==="discountsTab"){
+
+        loadDiscounts();
+
+    }
+
+
+
     if(tab==="analyticsTab"){
 
         loadAnalytics();
@@ -127,10 +143,6 @@ function openTab(tab){
 
 
 }
-
-
-
-
 
 
 
@@ -179,10 +191,6 @@ function loadDashboard(){
 
 
 
-
-
-
-
 // =======================================
 // PRODUCTS
 // =======================================
@@ -201,7 +209,6 @@ function saveProducts(){
 
 
 }
-
 
 
 
@@ -312,8 +319,6 @@ function loadProducts(){
 
 
 
-
-
 document
 .addEventListener(
 "input",
@@ -330,10 +335,6 @@ function(e){
 
 
 });
-
-
-
-
 
 
 
@@ -409,9 +410,6 @@ function addAdminProduct(){
 
 
 
-
-
-
 function savePrice(index){
 
 
@@ -446,9 +444,6 @@ function savePrice(index){
 
 
 
-
-
-
 function deleteProduct(index){
 
 
@@ -477,9 +472,6 @@ function deleteProduct(index){
 
 
 }
-
-
-
 
 
 
@@ -593,6 +585,128 @@ View Full Order
     });
 
 }
+
+// =======================================
+// DISCOUNTS
+// =======================================
+
+function loadDiscounts(){
+
+    loadDiscountCodes();
+    loadPresetDiscounts();
+
+}
+
+function loadDiscountCodes(){
+
+    let box = document.getElementById("discountCodesList");
+    box.innerHTML = "";
+
+    if(discountCodes.length === 0){
+        box.innerHTML = "<p>No discount codes created yet.</p>";
+        return;
+    }
+
+    discountCodes.forEach((code, index)=>{
+
+        let div = document.createElement("div");
+        div.className = "cart-item";
+
+        div.innerHTML = `
+
+<b>${code.code}</b> - ${code.percent}% OFF
+
+<br>
+
+Used: ${code.used ? "✅ YES" : "❌ NO"}
+
+<br><br>
+
+<button onclick="deleteDiscountCode(${index})">
+🗑 Delete
+</button>
+
+`;
+
+        box.appendChild(div);
+
+    });
+
+}
+
+function loadPresetDiscounts(){
+
+    let box = document.getElementById("presetDiscountsList");
+    box.innerHTML = "";
+
+    presetDiscounts.forEach((discount, index)=>{
+
+        let div = document.createElement("div");
+        div.className = "cart-item";
+
+        div.innerHTML = `
+
+<b>${discount.name}</b>
+
+<br>
+
+Discount: ${discount.discount}%
+
+<br>
+
+<p style="font-size:12px; color:#999;">Pre-set - Cannot be modified</p>
+
+`;
+
+        box.appendChild(div);
+
+    });
+
+}
+
+function createDiscountCode(){
+
+    let code = document.getElementById("discountCode").value.toUpperCase().trim();
+    let percent = Number(document.getElementById("discountPercent").value);
+
+    if(!code || percent <= 0 || percent > 100){
+        alert("Enter a valid code and percentage!");
+        return;
+    }
+
+    if(discountCodes.some(d => d.code === code)){
+        alert("This code already exists!");
+        return;
+    }
+
+    discountCodes.push({
+        code: code,
+        percent: percent,
+        used: false
+    });
+
+    localStorage.setItem("discountCodes", JSON.stringify(discountCodes));
+
+    document.getElementById("discountCode").value = "";
+    document.getElementById("discountPercent").value = "";
+
+    alert("✅ Discount code created: " + code);
+
+    loadDiscountCodes();
+
+}
+
+function deleteDiscountCode(index){
+
+    if(confirm("Delete this discount code?")){
+        discountCodes.splice(index, 1);
+        localStorage.setItem("discountCodes", JSON.stringify(discountCodes));
+        loadDiscountCodes();
+    }
+
+}
+
+
 // =======================================
 // ANALYTICS
 // =======================================
@@ -636,7 +750,6 @@ function loadAnalytics(){
 
 
 
-
     let mostSold = "None";
 
     let highest = 0;
@@ -658,7 +771,6 @@ function loadAnalytics(){
 
 
     }
-
 
 
 
@@ -749,7 +861,9 @@ function exportData(){
 
         products:products,
 
-        orders:orders
+        orders:orders,
+
+        discountCodes:discountCodes
 
 
     };
@@ -797,11 +911,6 @@ function exportData(){
 
 
 }
-
-
-
-
-
 
 
 
@@ -860,9 +969,22 @@ function importData(event){
 
         }
 
+        if(data.discountCodes){
+
+            discountCodes =
+            data.discountCodes;
+
+        }
 
 
-        saveProducts();
+
+        localStorage.setItem(
+
+        "products",
+
+        JSON.stringify(products)
+
+        );
 
 
 
@@ -874,6 +996,13 @@ function importData(event){
 
         );
 
+        localStorage.setItem(
+
+        "discountCodes",
+
+        JSON.stringify(discountCodes)
+
+        );
 
 
         alert(
@@ -931,5 +1060,4 @@ ${order.date}
 );
 
 }
-
 
