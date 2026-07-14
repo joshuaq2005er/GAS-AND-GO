@@ -14,8 +14,22 @@ body {
 
 }
 
+.discount-panel {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #222;
+    border-radius: 10px;
+}
 
+.discount-panel h2 {
+    margin-bottom: 10px;
+}
 
+.discount-panel button {
+    width: 100%;
+    margin: 5px 0;
+}
 
 /* =========================
 HEADER
