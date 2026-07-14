@@ -211,14 +211,14 @@ function searchProducts(){
         button.onclick=function(){
 
 
-            currentCategory =
-            product.category;
+    currentCategory =
+    product.category;
 
 
-            displayProducts();
+    displayProducts();
 
 
-            setTimeout(()=>{
+    highlightCategory(product.category);
 
 
                 let items =
