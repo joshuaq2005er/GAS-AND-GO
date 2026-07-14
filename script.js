@@ -528,21 +528,39 @@ function updateCart(){
     });
 
 
+let discountAmount = 0;
 let total = subtotal;
 
 if(discount > 0){
-    total = subtotal - (subtotal * discount / 100);
+    discountAmount = Math.round(subtotal * discount / 100);
+    total = subtotal - discountAmount;
 }
 
 let subtotalElement = document.getElementById("subtotal");
-let totalElement = document.getElementById("total");
+let topSubtotalElement = document.getElementById("topSubtotal");
+let discountElement = document.getElementById("topDiscount");
+let topTotalElement = document.getElementById("topTotal");
+let cartTotalElement = document.getElementById("total");
+
 
 if(subtotalElement){
     subtotalElement.innerText = subtotal;
 }
 
-if(totalElement){
-    totalElement.innerText = Math.round(total);
+if(topSubtotalElement){
+    topSubtotalElement.innerText = subtotal;
+}
+
+if(discountElement){
+    discountElement.innerText = discountAmount || 0;
+}
+
+if(topTotalElement){
+    topTotalElement.innerText = Math.round(total);
+}
+
+if(cartTotalElement){
+    cartTotalElement.innerText = Math.round(total);
 }
 
 
