@@ -78,8 +78,8 @@ let products = [
 {name:"Luxury Chocolate Bar",price:300,category:"Snacks"},
 
 {name:"Protien Bar",price:150,category:"Snacks"},
-{name:"Donut",price:100,category:"Snacks"},
-{name:"Dozen Donut",price:1200,category:"Snacks"},
+{name:"Donut (Any)",price:100,category:"Snacks"},
+{name:"Dozen Donut (Any)",price:1200,category:"Snacks"},
 
 
 /* =========================
