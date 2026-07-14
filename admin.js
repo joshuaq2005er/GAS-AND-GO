@@ -720,7 +720,7 @@ function loadAnalytics(){
 
 function resetAnalytics(){
 
-    if(confirm("Reset analytics data? This will delete all order statistics.")){
+    if(confirm("Reset analytics data?")){
 
         orders = [];
 
