@@ -146,7 +146,6 @@ let paymentMethod = "None";
 
 
 
-
 // ==============================
 // DISPLAY PRODUCTS & Search
 // ==============================
@@ -210,54 +209,45 @@ function searchProducts(){
 
         button.onclick=function(){
 
+            addToCart(product);
 
-    currentCategory =
-    product.category;
-
-
-    displayProducts();
-
-                let items =
-                document.querySelectorAll(".product");
+            let items =
+            document.querySelectorAll(".product");
 
 
-                items.forEach(item=>{
+            items.forEach(item=>{
 
 
-                    if(
-                    item.innerText
-                    .includes(product.name)
-                    ){
+                if(
+                item.innerText
+                .includes(product.name)
+                ){
 
 
-                        item.scrollIntoView({
-                            behavior:"smooth",
-                            block:"center"
-                        });
+                    item.scrollIntoView({
+                        behavior:"smooth",
+                        block:"center"
+                    });
 
 
-                        item.classList.add(
-                            "highlight-product"
+                    item.classList.add(
+                        "highlight-product"
+                    );
+
+
+                    setTimeout(()=>{
+
+                        item.classList.remove(
+                        "highlight-product"
                         );
 
-
-                        setTimeout(()=>{
-
-                            item.classList.remove(
-                            "highlight-product"
-                            );
-
-                        },5000);
+                    },5000);
 
 
-                    }
+                }
 
 
-                });
-
-
-            },100);
-
+            });
 
         };
 
@@ -338,7 +328,7 @@ function displayProducts(){
 
 }
 
-function changeCategory(category, button){
+function changeCategory(category){
 
     currentCategory = category;
 
@@ -351,8 +341,13 @@ function changeCategory(category, button){
         btn.classList.remove("active-category");
     });
 
-
-    button.classList.add("active-category");
+    document
+    .querySelectorAll(".category-panel button")
+    .forEach(btn=>{
+        if(btn.innerText.includes(category)){
+            btn.classList.add("active-category");
+        }
+    });
 
 }
 
@@ -405,8 +400,6 @@ function addToCart(product){
 
 
 }
-
-
 
 
 
@@ -582,8 +575,6 @@ function removeItem(index){
 
 
 
-
-
 // ==============================
 // CLEAR CART
 // ==============================
@@ -599,9 +590,6 @@ function clearCart(){
 
 
 }
-
-
-
 
 
 
@@ -631,10 +619,6 @@ function setPayment(method){
 
 
 }
-
-
-
-
 
 
 
@@ -695,8 +679,6 @@ function calculateChange(){
 
 
 
-
-
 let cashBox =
 document.getElementById(
 "cashInput"
@@ -718,11 +700,6 @@ calculateChange
 
 
 
-
-
-
-
-
 // ==============================
 // ORDERS
 // ==============================
@@ -736,11 +713,6 @@ localStorage.getItem(
 )
 
 ) || [];
-
-
-
-
-
 
 
 
@@ -1020,12 +992,6 @@ ${order.payment}
 
 <br><br>
 
-<button onclick="deleteOrder(${order.id})">
-
-Delete
-
-</button>
-
 `;
 
         box.appendChild(div);
@@ -1085,9 +1051,6 @@ function openFuel(){
 
 
 
-
-
-
 function closeFuel(){
 
 
@@ -1105,10 +1068,6 @@ function closeFuel(){
 
 
 }
-
-
-
-
 
 
 
@@ -1158,7 +1117,6 @@ function addFuel(){
 
 
 
-
     let fuelNames = {
 
 
@@ -1180,7 +1138,6 @@ function addFuel(){
 
 
     };
-
 
 
 
@@ -1212,7 +1169,6 @@ function addFuel(){
 
 
 
-
     updateCart();
 
 
@@ -1222,11 +1178,6 @@ function addFuel(){
 
 
 }
-
-
-
-
-
 
 
 
@@ -1284,8 +1235,6 @@ function exportData(){
 
 
 
-
-
     let link =
     document.createElement(
     "a"
@@ -1312,11 +1261,6 @@ function exportData(){
 
 
 
-
-
-
-
-
 // ==============================
 // IMPORT BACKUP
 // ==============================
@@ -1337,11 +1281,8 @@ function importData(event){
 
 
 
-
-
     let reader =
     new FileReader();
-
 
 
 
@@ -1359,7 +1300,6 @@ function importData(event){
 
 
 
-
         if(data.products){
 
 
@@ -1368,7 +1308,6 @@ function importData(event){
 
 
         }
-
 
 
 
@@ -1385,7 +1324,6 @@ function importData(event){
 
 
 
-
         localStorage.setItem(
 
         "products",
@@ -1397,7 +1335,6 @@ function importData(event){
 
 
 
-
         localStorage.setItem(
 
         "orders",
@@ -1405,7 +1342,6 @@ function importData(event){
         JSON.stringify(orders)
 
         );
-
 
 
 
@@ -1425,17 +1361,11 @@ function importData(event){
 
 
 
-
     reader.readAsText(file);
 
 
 
 }
-
-
-
-
-
 
 
 
@@ -1458,9 +1388,6 @@ localStorage.getItem(
 
 
 
-
-
-
 function changeStoreName(){
 
 
@@ -1474,7 +1401,6 @@ function changeStoreName(){
     storeName
 
     );
-
 
 
 
@@ -1510,11 +1436,6 @@ function changeStoreName(){
 
 
 
-
-
-
-
-
 // ==============================
 // PRINT RECEIPT
 // ==============================
@@ -1538,7 +1459,6 @@ function printReceipt(){
 
 
 
-
     let printWindow =
 
     window.open(
@@ -1546,7 +1466,6 @@ function printReceipt(){
     "",
     "width=400,height=600"
     );
-
 
 
 
@@ -1569,11 +1488,6 @@ function printReceipt(){
 
 
 
-
-
-
-
-
 // ==============================
 // ADMIN DASHBOARD LINK
 // ==============================
@@ -1587,11 +1501,6 @@ function openAdminDashboard(){
 
 
 }
-
-
-
-
-
 
 
 
@@ -1684,9 +1593,6 @@ function getSalesStats(){
 
 
 
-
-
-
 function showStats(){
 
 
@@ -1715,11 +1621,6 @@ $${stats.revenue}
 
 
 }
-
-
-
-
-
 
 
 
