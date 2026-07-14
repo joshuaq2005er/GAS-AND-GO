@@ -27,8 +27,6 @@ HEADER
 
     align-items:center;
 
-    justify-content:space-between;
-
     gap:15px;
 
     margin-bottom:15px;
@@ -38,14 +36,14 @@ HEADER
 
 .products-header h2 {
 
-    margin:0;
+    flex-shrink:0;
 
 }
 
 
 #productSearch {
 
-    width:200px;
+    width:180px;
 
     padding:10px;
 
@@ -179,6 +177,8 @@ MAIN POS LAYOUT
 .products-panel {
 
     flex:1;
+
+    min-width:0;
 
     max-height:80vh;
 
