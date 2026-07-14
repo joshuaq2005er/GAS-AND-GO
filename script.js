@@ -148,9 +148,133 @@ let paymentMethod = "None";
 
 
 // ==============================
-// DISPLAY PRODUCTS
+// DISPLAY PRODUCTS & Search
 // ==============================
+function searchProducts(){
 
+    let search =
+    document.getElementById("productSearch")
+    .value
+    .toLowerCase();
+
+
+    if(search === ""){
+        displayProducts();
+        return;
+    }
+
+
+    let box =
+    document.getElementById("products");
+
+
+    box.innerHTML="";
+
+
+    products
+    .filter(product =>
+
+        product.name
+        .toLowerCase()
+        .includes(search)
+
+        ||
+
+        search
+        .split(" ")
+        .some(word =>
+            product.name
+            .toLowerCase()
+            .includes(word)
+        )
+
+    )
+    .forEach(product=>{
+
+
+        let button =
+        document.createElement("button");
+
+
+        button.className="product";
+
+
+        button.innerHTML =
+
+        `
+        ${product.name}
+        <br>
+        $${product.price}
+        `;
+
+
+        button.onclick=function(){
+
+
+            currentCategory =
+            product.category;
+
+
+            displayProducts();
+
+
+            setTimeout(()=>{
+
+
+                let items =
+                document.querySelectorAll(".product");
+
+
+                items.forEach(item=>{
+
+
+                    if(
+                    item.innerText
+                    .includes(product.name)
+                    ){
+
+
+                        item.scrollIntoView({
+                            behavior:"smooth",
+                            block:"center"
+                        });
+
+
+                        item.classList.add(
+                            "highlight-product"
+                        );
+
+
+                        setTimeout(()=>{
+
+                            item.classList.remove(
+                            "highlight-product"
+                            );
+
+                        },5000);
+
+
+                    }
+
+
+                });
+
+
+            },100);
+
+
+        };
+
+
+        box.appendChild(button);
+
+
+    });
+
+
+}
+
+// display
 
 function displayProducts(){
 
