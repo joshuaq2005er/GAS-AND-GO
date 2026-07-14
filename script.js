@@ -79,7 +79,9 @@ let products = [
 
 {name:"Protien Bar",price:150,category:"Snacks"},
 {name:"Donut (Any)",price:100,category:"Snacks"},
-{name:"6 Donut Box(Any)",price:600,category:"Snacks"},
+{name:"3 Donut Box (Any)",price:300,category:"Snacks"},
+{name:"6 Donut Box (Any)",price:600,category:"Snacks"},
+{name:"9 Donut Box (Any)",price:900,category:"Snacks"},
 {name:"Dozen Donut (Any)",price:1200,category:"Snacks"},
 
 
