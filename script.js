@@ -217,10 +217,6 @@ function searchProducts(){
 
     displayProducts();
 
-
-    highlightCategory(product.category);
-
-
                 let items =
                 document.querySelectorAll(".product");
 
