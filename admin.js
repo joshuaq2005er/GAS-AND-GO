@@ -563,7 +563,7 @@ ${order.customerID || "None"}
 
 <b>Items:</b>
 
-${order.items.map(item=>item.name).join(", ")}
+${order.items.map(item=>item.name + " x" + item.quantity).join(", ")}
 
 <br>
 
@@ -580,6 +580,12 @@ ${order.payment}
 <b>Proof:</b>
 ${order.proof}
 
+<br><br>
+
+<button onclick='viewOrder(${JSON.stringify(order)})'>
+View Full Order
+</button>
+
 `;
 
         box.appendChild(div);
@@ -587,7 +593,6 @@ ${order.proof}
     });
 
 }
-
 // =======================================
 // ANALYTICS
 // =======================================
@@ -875,5 +880,42 @@ function importData(event){
     reader.readAsText(file);
 
 
+
+}
+
+
+// view order
+
+function viewOrder(order){
+
+alert(
+`
+Order #${order.id}
+
+Customer:
+${order.customerUsername}
+
+User ID:
+${order.customerID || "None"}
+
+Items:
+
+${order.items.map(item =>
+item.name + " x" + item.quantity
+).join("\n")}
+
+Total:
+$${order.total}
+
+Payment:
+${order.payment}
+
+Proof:
+${order.proof}
+
+Date:
+${order.date}
+`
+);
 
 }
