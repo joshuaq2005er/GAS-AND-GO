@@ -69,12 +69,13 @@ let products = [
 {name:"Snickers",price:175,category:"Snacks"},
 {name:"Twix",price:175,category:"Snacks"},
 {name:"KitKat",price:180,category:"Snacks"},
-{name:"B&Bs",price:200,category:"Snacks"},
+{name:"M&Ms",price:200,category:"Snacks"},
 {name:"Skittles Original",price:200,category:"Snacks"},
 {name:"Skittles Tropical",price:220,category:"Snacks"},
 {name:"Sour Patch Kids",price:230,category:"Snacks"},
 
 {name:"Beef Jerky",price:450,category:"Snacks"},
+{name:"Hershey's Chocolate Bar",price:300,category:"Snacks"},
 {name:"Luxury Chocolate Bar",price:300,category:"Snacks"},
 
 {name:"Boiled Peanuts",price:200,category:"Snacks"},
