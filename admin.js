@@ -716,13 +716,25 @@ function loadAnalytics(){
 
 }
 
+// REST ANALYTICSICS
 
+function resetAnalytics(){
 
+    if(confirm("Reset analytics data? This will delete all order statistics.")){
 
+        orders = [];
 
+        localStorage.setItem(
+            "orders",
+            JSON.stringify(orders)
+        );
 
+        loadAnalytics();
+        loadDashboard();
 
+    }
 
+}
 
 // =======================================
 // EXPORT BACKUP
@@ -919,3 +931,5 @@ ${order.date}
 );
 
 }
+
+
