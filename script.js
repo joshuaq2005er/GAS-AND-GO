@@ -528,14 +528,22 @@ function updateCart(){
     });
 
 
-    let total = subtotal;
-    
-    if(discount > 0){
-        total = subtotal - (subtotal * discount / 100);
-    }
+let total = subtotal;
 
-    document.getElementById("subtotal").innerText = subtotal;
-    document.getElementById("total").innerText = Math.round(total);
+if(discount > 0){
+    total = subtotal - (subtotal * discount / 100);
+}
+
+let subtotalElement = document.getElementById("subtotal");
+let totalElement = document.getElementById("total");
+
+if(subtotalElement){
+    subtotalElement.innerText = subtotal;
+}
+
+if(totalElement){
+    totalElement.innerText = Math.round(total);
+}
 
 
 
