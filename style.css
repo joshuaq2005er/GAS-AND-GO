@@ -844,3 +844,10 @@ MOBILE SUPPORT
 
 }
 
+.made-by {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 14px;
+    opacity: 0.6;
+}
