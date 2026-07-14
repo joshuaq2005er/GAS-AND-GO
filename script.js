@@ -77,6 +77,7 @@ let products = [
 {name:"Beef Jerky",price:450,category:"Snacks"},
 {name:"Luxury Chocolate Bar",price:300,category:"Snacks"},
 
+{name:"Boiled Peanuts",price:200,category:"Snacks"},
 {name:"Protien Bar",price:150,category:"Snacks"},
 {name:"Donut (Any)",price:100,category:"Snacks"},
 {name:"3 Donut Box (Any)",price:300,category:"Snacks"},
