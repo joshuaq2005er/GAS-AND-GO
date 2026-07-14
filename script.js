@@ -1785,21 +1785,10 @@ function(event){
 function startup(){
 
 
-
-    saveProducts();
-
-
-
     displayProducts();
-
-
 
     updateCart();
 
-
-
 }
-
-
 
 startup();
