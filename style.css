@@ -830,57 +830,35 @@ ADMIN PRODUCTS
 /* =========================
 MOBILE SUPPORT
 ========================= */
-
-
 @media(max-width:900px){
-
 
 .pos-container {
 
-
-    grid-template-columns:1fr;
-
-
+    flex-direction:column;
 
 }
-
 
 
 .cart-panel {
 
-
     position:relative;
 
-
-
 }
-
 
 
 .category-panel {
 
-
     display:flex;
-
-
     flex-wrap:wrap;
 
-
-
 }
-
 
 
 .category-panel button {
 
-
     width:48%;
 
-
-
 }
-
-
 
 }
 
@@ -890,4 +868,25 @@ MOBILE SUPPORT
     left: 10px;
     font-size: 14px;
     opacity: 0.6;
+}
+
+.pos-container {
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+}
+
+
+.category-panel {
+    order:1;
+}
+
+
+.products-panel {
+    order:2;
+}
+
+
+.cart-panel {
+    order:3;
 }
