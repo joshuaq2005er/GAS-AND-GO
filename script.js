@@ -338,7 +338,7 @@ function displayProducts(){
 
 }
 
-function changeCategory(category){
+function changeCategory(category, button){
 
     currentCategory = category;
 
@@ -347,20 +347,15 @@ function changeCategory(category){
 
     document
     .querySelectorAll(".category-panel button")
-    .forEach(button=>{
-
-        button.classList.remove(
-            "active-category"
-        );
-
+    .forEach(btn=>{
+        btn.classList.remove("active-category");
     });
 
 
-    event.target.classList.add(
-        "active-category"
-    );
+    button.classList.add("active-category");
 
 }
+
 // ==============================
 // CART FUNCTIONS
 // ==============================
