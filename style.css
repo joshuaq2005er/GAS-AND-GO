@@ -21,6 +21,42 @@ body {
 HEADER
 ========================= */
 
+.products-header {
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:15px;
+
+}
+
+
+.products-header h2 {
+
+    margin:0;
+
+}
+
+
+#productSearch {
+
+    width:200px;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    border:none;
+
+    font-size:14px;
+
+}
+
 
 header,
 .topbar {
