@@ -130,7 +130,7 @@ products = [
     )
 ];
 
-
+console.log(products.length);
 
 // ==============================
 // CART
