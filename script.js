@@ -74,6 +74,8 @@ let products = [
 {name:"Skittles Tropical",price:220,category:"Snacks"},
 {name:"Sour Patch Kids",price:230,category:"Snacks"},
 
+{name:"Pup cups",price:50,category:"Snacks"},
+{name:"Whip Cream",price:250,category:"Snacks"},
 {name:"Beef Jerky",price:450,category:"Snacks"},
 {name:"Hershey's Chocolate Bar",price:300,category:"Snacks"},
 {name:"Luxury Chocolate Bar",price:300,category:"Snacks"},
