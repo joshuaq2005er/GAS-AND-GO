@@ -75,6 +75,8 @@ let products = [
 {name:"Skittles Original",price:200,category:"Snacks"},
 {name:"Skittles Tropical",price:220,category:"Snacks"},
 {name:"Sour Patch Kids",price:230,category:"Snacks"},
+{name:"Gummy Worms (Any),price:350,category:"Snacks"},
+{name:"Gummy (Any),price:250,category:"Snacks"},
 
 {name:"Pup cups",price:50,category:"Snacks"},
 {name:"Whip Cream",price:250,category:"Snacks"},
