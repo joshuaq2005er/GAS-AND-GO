@@ -19,6 +19,7 @@ let products = [
 ========================= */
 
 {name:"Water",price:150,category:"Cold Drinks"},
+{name:"Milk",price:250,category:"Cold Drinks"},
 {name:"Sparkling Water",price:200,category:"Cold Drinks"},
 {name:"Soda (Any)",price:250,category:"Cold Drinks"},
 {name:"Juice (Any)",price:275,category:"Cold Drinks"},
@@ -60,6 +61,7 @@ let products = [
 {name:"Doritos Nacho Cheese",price:260,category:"Snacks"},
 {name:"Doritos Cool Ranch",price:260,category:"Snacks"},
 {name:"Doritos Sweet Chili",price:275,category:"Snacks"},
+{name:"Cakes (Chips)",price:250,category:"Snacks"},
 
 {name:"Pringles Original",price:250,category:"Snacks"},
 {name:"Pringles Sour Cream",price:260,category:"Snacks"},
@@ -77,9 +79,11 @@ let products = [
 {name:"Pup cups",price:50,category:"Snacks"},
 {name:"Whip Cream",price:250,category:"Snacks"},
 {name:"Beef Jerky",price:450,category:"Snacks"},
-{name:"Hershey's Chocolate Bar",price:300,category:"Snacks"},
+{name:"Hershey's Chocolate Bar",price:250,category:"Snacks"},
+{name:"Feastables Chocolate Bar",price:300,category:"Snacks"},
 {name:"Luxury Chocolate Bar",price:300,category:"Snacks"},
 
+{name:"Cakes (Real Cake)",price:750,category:"Snacks"},
 {name:"Boiled Peanuts",price:200,category:"Snacks"},
 {name:"Protien Bar",price:150,category:"Snacks"},
 {name:"Donut (Any)",price:100,category:"Snacks"},
