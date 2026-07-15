@@ -860,6 +860,49 @@ function applyCustomDiscountCode(){
 
 }
 
+function updateDiscountDisplay(){
+
+    let discountDisplay = document.getElementById("discountDisplay");
+
+    if(!discountDisplay) return;
+
+    
+
+    if(discount > 0){
+
+        discountDisplay.innerHTML = `
+
+            <b>:moneybag: Discount Applied: ${discount}% (${discountReason})</b><br>
+
+            <button onclick="clearDiscount()">Remove Discount</button>
+
+        `;
+
+    }
+
+    else{
+
+        discountDisplay.innerHTML = "";
+
+    }
+
+}
+
+
+
+function clearDiscount(){
+
+    discount = 0;
+
+    discountType = "none";
+
+    discountReason = "";
+
+    updateCart();
+
+    updateDiscountDisplay();
+
+}
 // ==============================
 // ORDERS
 // ==============================
