@@ -594,37 +594,211 @@ View Full Order
 function loadDiscounts(){
 
     loadDiscountCodes();
-    loadPresetDiscounts();
+
+}
+
+function createDiscountCode(){
+
+    let code =
+    document.getElementById("discountCodeInput")
+    .value
+    .trim()
+    .toUpperCase();
+
+    let description =
+    document.getElementById("discountDescriptionInput")
+    .value
+    .trim();
+
+    let type =
+    document.getElementById("discountTypeInput")
+    .value;
+
+    let value =
+    Number(
+        document.getElementById("discountValueInput")
+        .value
+    );
+
+    let minimumPurchase =
+    Number(
+        document.getElementById("discountMinimumInput")
+        .value
+    ) || 0;
+
+    let maxUses =
+    Number(
+        document.getElementById("discountUsesInput")
+        .value
+    ) || 1;
+
+    let active =
+    document.getElementById("discountActiveInput")
+    .checked;
+
+    if(code===""){
+
+        alert("Enter a code.");
+        return;
+
+    }
+
+    if(value<=0){
+
+        alert("Enter a valid discount value.");
+        return;
+
+    }
+
+    if(
+        discountCodes.some(
+            d=>d.code===code
+        )
+    ){
+
+        alert("That code already exists.");
+
+        return;
+
+    }
+
+    discountCodes.push({
+
+        code:code,
+
+        description:description,
+
+        type:type,
+
+        value:value,
+
+        minimumPurchase:minimumPurchase,
+
+        maxUses:maxUses,
+
+        uses:0,
+
+        active:active,
+
+        created:
+        new Date().toLocaleString()
+
+    });
+
+    localStorage.setItem(
+
+        "discountCodes",
+
+        JSON.stringify(discountCodes)
+
+    );
+
+    document.getElementById("discountCodeInput").value="";
+    document.getElementById("discountDescriptionInput").value="";
+    document.getElementById("discountValueInput").value="";
+    document.getElementById("discountMinimumInput").value="";
+    document.getElementById("discountUsesInput").value="1";
+    document.getElementById("discountActiveInput").checked=true;
+
+    loadDiscountCodes();
+
+    alert("Discount created!");
 
 }
 
 function loadDiscountCodes(){
 
-    let box = document.getElementById("discountCodesList");
-    box.innerHTML = "";
+    let box =
+    document.getElementById(
+        "discountCodesList"
+    );
 
-    if(discountCodes.length === 0){
-        box.innerHTML = "<p>No discount codes created yet.</p>";
+    box.innerHTML="";
+
+    if(discountCodes.length===0){
+
+        box.innerHTML=
+        "<p>No discount codes created.</p>";
+
         return;
+
     }
 
-    discountCodes.forEach((code, index)=>{
+    discountCodes.forEach((discount,index)=>{
 
-        let div = document.createElement("div");
-        div.className = "cart-item";
+        let div =
+        document.createElement("div");
 
-        div.innerHTML = `
+        div.className="cart-item";
 
-<b>${code.code}</b> - ${code.percent}% OFF
+        div.innerHTML=`
 
-<br>
-
-Used: ${code.used ? "✅ YES" : "❌ NO"}
+<b>${discount.code}</b>
 
 <br><br>
 
+Description:
+
+${discount.description || "None"}
+
+<br><br>
+
+Discount:
+
+${discount.type==="percent"
+?
+discount.value+"% OFF"
+:
+"$"+discount.value+" OFF"}
+
+<br><br>
+
+Minimum Purchase:
+
+$${discount.minimumPurchase}
+
+<br><br>
+
+Uses:
+
+${discount.uses} / ${discount.maxUses}
+
+<br><br>
+
+Status:
+
+${
+discount.active
+?
+"🟢 Active"
+:
+"🔴 Disabled"
+}
+
+<br><br>
+
+Created:
+
+${discount.created}
+
+<br><br>
+
+<button onclick="toggleDiscount(${index})">
+
+${
+discount.active
+?
+"Disable"
+:
+"Enable"
+}
+
+</button>
+
 <button onclick="deleteDiscountCode(${index})">
-🗑 Delete
+
+Delete
+
 </button>
 
 `;
@@ -635,63 +809,18 @@ Used: ${code.used ? "✅ YES" : "❌ NO"}
 
 }
 
-function loadPresetDiscounts(){
+function toggleDiscount(index){
 
-    let box = document.getElementById("presetDiscountsList");
-    box.innerHTML = "";
+    discountCodes[index].active =
+    !discountCodes[index].active;
 
-    presetDiscounts.forEach((discount, index)=>{
+    localStorage.setItem(
 
-        let div = document.createElement("div");
-        div.className = "cart-item";
+        "discountCodes",
 
-        div.innerHTML = `
+        JSON.stringify(discountCodes)
 
-<b>${discount.name}</b>
-
-<br>
-
-Discount: ${discount.discount}%
-
-<br>
-
-<p style="font-size:12px; color:#999;">Pre-set - Cannot be modified</p>
-
-`;
-
-        box.appendChild(div);
-
-    });
-
-}
-
-function createDiscountCode(){
-
-    let code = document.getElementById("discountCode").value.toUpperCase().trim();
-    let percent = Number(document.getElementById("discountPercent").value);
-
-    if(!code || percent <= 0 || percent > 100){
-        alert("Enter a valid code and percentage!");
-        return;
-    }
-
-    if(discountCodes.some(d => d.code === code)){
-        alert("This code already exists!");
-        return;
-    }
-
-    discountCodes.push({
-        code: code,
-        percent: percent,
-        used: false
-    });
-
-    localStorage.setItem("discountCodes", JSON.stringify(discountCodes));
-
-    document.getElementById("discountCode").value = "";
-    document.getElementById("discountPercent").value = "";
-
-    alert("✅ Discount code created: " + code);
+    );
 
     loadDiscountCodes();
 
@@ -699,14 +828,29 @@ function createDiscountCode(){
 
 function deleteDiscountCode(index){
 
-    if(confirm("Delete this discount code?")){
-        discountCodes.splice(index, 1);
-        localStorage.setItem("discountCodes", JSON.stringify(discountCodes));
+    if(
+
+        confirm(
+            "Delete this code?"
+        )
+
+    ){
+
+        discountCodes.splice(index,1);
+
+        localStorage.setItem(
+
+            "discountCodes",
+
+            JSON.stringify(discountCodes)
+
+        );
+
         loadDiscountCodes();
+
     }
 
 }
-
 
 // =======================================
 // ANALYTICS
