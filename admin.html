@@ -360,42 +360,147 @@ oninput="loadOrders()"
 </h2>
 
 
+
 <h3>
 Create New Discount Code
 </h3>
 
+
+<label>
+Code
+</label>
+
 <input
-id="newCodeInput"
-placeholder="Code (e.g., NEWYEAR25)"
+id="discountCodeInput"
+placeholder="Example: WELCOME20"
 maxlength="20"
 >
 
-<input
-id="newCodePercentage"
-type="number"
-placeholder="Discount %"
-min="1"
-max="100"
->
+
+
+<label>
+Description
+</label>
 
 <input
-id="newCodeDescription"
-placeholder="Description (e.g., Employee Discord)"
+id="discountDescriptionInput"
+placeholder="Example: Customer Promotion"
 >
+
+
+
+
+<label>
+Discount Type
+</label>
+
+
+<select id="discountTypeInput">
+
+<option value="percent">
+Percentage
+</option>
+
+
+<option value="amount">
+Dollar Amount
+</option>
+
+
+</select>
+
+
+
+
+
+<label>
+Value
+</label>
+
+<input
+id="discountValueInput"
+type="number"
+placeholder="Example: 20"
+min="1"
+>
+
+
+
+
+<label>
+Minimum Purchase (Optional)
+</label>
+
+<input
+id="discountMinimumInput"
+type="number"
+placeholder="Example: 200"
+min="0"
+>
+
+
+
+
+<label>
+Maximum Uses
+</label>
+
+<input
+id="discountUsesInput"
+type="number"
+placeholder="Example: 1"
+min="1"
+value="1"
+>
+
+
+
+
+<label>
+
+Status
+
+</label>
+
+
+<br>
+
+
+<input
+id="discountActiveInput"
+type="checkbox"
+checked
+>
+
+Active
+
+
+
+<br><br>
+
 
 <button onclick="createDiscountCode()">
+
 + Create Code
+
 </button>
 
+
+
 <hr>
+
+
 
 <h3>
 Active Discount Codes
 </h3>
 
+
+
 <div id="discountCodesList">
 
 </div>
+
 
 
 </section>
