@@ -1036,17 +1036,29 @@ total = Math.round(total);
         "orders",
         JSON.stringify(orders)
     );
-    
-    // Mark code as used if it was a one-time code
 
-    if(discountType === "code"){
+// Update custom discount code usage
 
-    usedCodes.push(discountCodeUsed);
+if (discountType === "code") {
 
-    localStorage.setItem(
-        "usedCodes",
-        JSON.stringify(usedCodes)
-    );
+    let discountCodes = JSON.parse(localStorage.getItem("discountCodes")) || [];
+
+    let code = discountCodes.find(c => c.code === discountCodeUsed);
+
+    if (code) {
+
+        code.uses = (code.uses || 0) + 1;
+
+        if (code.uses >= code.maxUses) {
+            code.active = false;
+        }
+
+        localStorage.setItem(
+            "discountCodes",
+            JSON.stringify(discountCodes)
+        );
+
+    }
 
 }
 
