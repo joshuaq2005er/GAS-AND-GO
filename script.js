@@ -901,15 +901,39 @@ function updateDiscountDisplay(){
 
 function clearDiscount(){
 
+    // If a custom code was applied, undo its reservation
+    if(discountType === "code"){
+
+        let discountCodes =
+        JSON.parse(localStorage.getItem("discountCodes")) || [];
+
+        let code =
+        discountCodes.find(c => c.code === discountCodeUsed);
+
+        if(code){
+
+            code.uses = Math.max(0, (code.uses || 0) - 1);
+
+            code.active = true;
+
+            localStorage.setItem(
+                "discountCodes",
+                JSON.stringify(discountCodes)
+            );
+        }
+
+        discountCodeUsed = "";
+    }
+
+    // Reset discount back to normal
     discount = 0;
-
     discountType = "none";
-
     discountReason = "";
 
     updateCart();
-
     updateDiscountDisplay();
+
+}
 
 }
 // ==============================
