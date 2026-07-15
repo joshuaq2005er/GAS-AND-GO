@@ -878,7 +878,7 @@ function updateDiscountDisplay(){
 
         discountDisplay.innerHTML = `
 
-            <b>:moneybag: Discount Applied: ${discount}% (${discountReason})</b><br>
+            <b>💰 Discount Applied: ${discount}% (${discountReason})</b><br>
 
             <button onclick="clearDiscount()">Remove Discount</button>
 
