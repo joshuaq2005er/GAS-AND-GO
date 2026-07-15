@@ -757,84 +757,108 @@ calculateChange
 // ==============================
 // DISCOUNT SYSTEM
 // ==============================
+function applyCustomDiscountCode(){
 
-let usedCodes = JSON.parse(
-    localStorage.getItem("usedCodes")
-) || [];
+    let code = prompt("Enter Discount Code");
 
-function setPresetDiscount(percentage, reason){
-    discount = percentage;
-    discountType = "preset";
-    discountReason = reason;
-    updateCart();
-    updateDiscountDisplay();
-}
-
-function updateDiscountDisplay(){
-    let discountDisplay = document.getElementById("discountDisplay");
-    if(!discountDisplay) return;
-    
-    if(discount > 0){
-        discountDisplay.innerHTML = `
-            <b>💰 Discount Applied: ${discount}% (${discountReason})</b><br>
-            <button onclick="clearDiscount()">Remove Discount</button>
-        `;
-    }
-    else{
-        discountDisplay.innerHTML = "";
-    }
-}
-
-function clearDiscount(){
-    discount = 0;
-    discountType = "none";
-    discountReason = "";
-    updateCart();
-    updateDiscountDisplay();
-}
-
-function applyDiscountCode(){
-    let code = document.getElementById("discountCodeInput").value.trim().toUpperCase();
-    discountCodeUsed = code;
-    
     if(!code){
-        alert("Please enter a discount code");
         return;
     }
-    
-    // Check if code was already used
-    if(usedCodes.includes(code)){
-        alert("This discount code has already been used!");
+
+    code = code.trim().toUpperCase();
+
+    let codes =
+    JSON.parse(
+        localStorage.getItem("discountCodes")
+    ) || [];
+
+    let found =
+    codes.find(c => c.code === code);
+
+    if(!found){
+
+        alert("❌ Invalid discount code.");
+
         return;
+
     }
-    
-    // Get all discount codes from localStorage
-    let allCodes = JSON.parse(localStorage.getItem("discountCodes")) || [];
-    let codeObj = allCodes.find(c => c.code === code);
-    
-    if(!codeObj){
-        alert("Invalid discount code");
+
+    if(!found.active){
+
+        alert("❌ This discount code has been disabled.");
+
         return;
+
     }
-    
-    if(!codeObj.active){
-        alert("This discount code has been deactivated");
+
+    if(found.uses >= found.maxUses){
+
+        alert("❌ This discount code has already been used.");
+
         return;
+
     }
-    
-    // Apply discount
-    discount = codeObj.percentage;
+
+    let subtotal = 0;
+
+    cart.forEach(item=>{
+
+        subtotal += item.price * item.quantity;
+
+    });
+
+    if(subtotal < found.minimumPurchase){
+
+        alert(
+            "Minimum purchase is $" +
+            found.minimumPurchase
+        );
+
+        return;
+
+    }
+
     discountType = "code";
-    discountReason = codeObj.description || "Discount Code";
+
+    discountReason = found.code;
+
+    if(found.type === "percent"){
+
+        discount = found.value;
+
+    }
+
+    else{
+
+        discount = 0;
+
+        discountAmount = found.value;
+
+    }
+
+    found.uses++;
+
+    if(found.uses >= found.maxUses){
+
+        found.active = false;
+
+    }
+
+    localStorage.setItem(
+
+        "discountCodes",
+
+        JSON.stringify(codes)
+
+    );
+
     updateCart();
+
     updateDiscountDisplay();
-    
-    document.getElementById("discountCodeInput").value = "";
-    alert(`Discount applied! ${codeObj.percentage}% off`);
+
+    alert("✅ Discount Applied!");
+
 }
-
-
-
 
 // ==============================
 // ORDERS
