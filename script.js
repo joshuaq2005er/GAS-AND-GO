@@ -57,6 +57,7 @@ let products = [
 ========================= */
 
 {name:"Lays Classic",price:225,category:"Snacks"},
+{name:"Lays Sour Cream & Onion",price:225,category:"Snacks"},
 {name:"Lays Paprika",price:240,category:"Snacks"},
 {name:"Doritos Nacho Cheese",price:260,category:"Snacks"},
 {name:"Doritos Cool Ranch",price:260,category:"Snacks"},
