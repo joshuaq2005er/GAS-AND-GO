@@ -911,7 +911,9 @@ function clearDiscount(){
 
         if(code){
 
-            code.uses = code.uses - 1;
+            code.uses = Math.max(0, code.uses - 1);
+            
+            code.active = true;
 
             localStorage.setItem(
                 "discountCodes",
