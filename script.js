@@ -901,7 +901,6 @@ function updateDiscountDisplay(){
 
 function clearDiscount(){
 
-    // If a custom code was applied, undo its reservation
     if(discountType === "code"){
 
         let discountCodes =
@@ -912,20 +911,23 @@ function clearDiscount(){
 
         if(code){
 
-            code.uses = Math.max(0, (code.uses || 0) - 1);
+            code.uses--;
 
-            code.active = true;
+            if(code.uses < 0){
+                code.uses = 0;
+            }
 
             localStorage.setItem(
                 "discountCodes",
                 JSON.stringify(discountCodes)
             );
+
         }
 
         discountCodeUsed = "";
+
     }
 
-    // Reset discount back to normal
     discount = 0;
     discountType = "none";
     discountReason = "";
