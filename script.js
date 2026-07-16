@@ -90,7 +90,7 @@ let products = [
 {name:"Ice Cream Cup (Any)",price:150,category:"Snacks"},
 {name:"Ice Cream Cone (Any)",price:250,category:"Snacks"},
 {name:"Ice Cream Waffle (Any)",price:350,category:"Snacks"},
-{name:"Cakes (Real Cake)",price:750,category:"Snacks"},
+{name:"Cake (Real Cake)",price:750,category:"Snacks"},
 {name:"Boiled Peanuts",price:200,category:"Snacks"},
 {name:"Protien Bar",price:150,category:"Snacks"},
 {name:"Donut (Any)",price:100,category:"Snacks"},
