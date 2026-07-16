@@ -86,6 +86,9 @@ let products = [
 {name:"Feastables Chocolate Bar",price:300,category:"Snacks"},
 {name:"Luxury Chocolate Bar",price:300,category:"Snacks"},
 
+{name:"Ice Cream Cup (Any)",price:150,category:"Snacks"},
+{name:"Ice Cream Cone (Any)",price:250,category:"Snacks"},
+{name:"Ice Cream Waffle (Any)",price:350,category:"Snacks"},
 {name:"Cakes (Real Cake)",price:750,category:"Snacks"},
 {name:"Boiled Peanuts",price:200,category:"Snacks"},
 {name:"Protien Bar",price:150,category:"Snacks"},
@@ -119,14 +122,14 @@ let products = [
 {name:"Energy Shot",price:300,category:"Extras"},
 {name:"Protein Shake",price:450,category:"Extras"},
 {name:"Ice Bag",price:200,category:"Extras"},
-
+{name:"Ice Cream Addon's (Any)",price:50,category:"Extras"},
 
 /* =========================
 ⛽ GAS
 ========================= */
 
 {name:"Regular Fuel",price:749,category:"Gas"},
-{name:"Plus Fuel",price:829,category:"Gas"},
+{name:"Plus Fuel (Diesel)",price:829,category:"Gas"},
 {name:"Premium Fuel",price:949,category:"Gas"},
 {name:"Exclusive Fuel",price:1250,category:"Gas"},
 
