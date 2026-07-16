@@ -65,6 +65,17 @@ let products = [
 {name:"Doritos Sweet Chili",price:275,category:"Snacks"},
 {name:"Cakes (Chips)",price:250,category:"Snacks"},
 
+{name:"Cheetos (Any)",price:280,category:"Snacks"},
+{name:"Cheetos Cheese Puffs (Cheese)",price:290,category:"Snacks"},
+{name:"Cheetos Flamin Hot",price:300,category:"Snacks"},
+
+{name:"Taxis (Any)",price:300,category:"Snacks"},
+{name:"Taxis Regular (Red)",price:300,category:"Snacks"},
+{name:"Taxis Blue Heat (Blue)",price:325,category:"Snacks"},
+{name:"Taxis Zombie (Greenk)",price:350,category:"Snacks"},
+{name:"Taxis Waves",price:370,category:"Snacks"},
+{name:"Taxis Chippz",price:385,category:"Snacks"},
+
 {name:"Pringles Original",price:250,category:"Snacks"},
 {name:"Pringles Sour Cream",price:260,category:"Snacks"},
 {name:"Pringles Hot & Spicy",price:275,category:"Snacks"},
