@@ -63,7 +63,9 @@ let products = [
 {name:"Doritos Nacho Cheese",price:260,category:"Snacks"},
 {name:"Doritos Cool Ranch",price:260,category:"Snacks"},
 {name:"Doritos Sweet Chili",price:275,category:"Snacks"},
+
 {name:"Cakes (Chips)",price:250,category:"Snacks"},
+{name:"Smarts (Chips)",price:275,category:"Snacks"},
 
 {name:"Cheetos (Any)",price:280,category:"Snacks"},
 {name:"Cheetos Cheese Puffs (Cheese)",price:290,category:"Snacks"},
