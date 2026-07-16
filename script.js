@@ -122,7 +122,7 @@ let products = [
 {name:"Energy Shot",price:300,category:"Extras"},
 {name:"Protein Shake",price:450,category:"Extras"},
 {name:"Ice Bag",price:200,category:"Extras"},
-{name:"Ice Cream Addon's (Any)",price:50,category:"Extras"},
+{name:"Ice Cream Toppings (Any)",price:50,category:"Extras"},
 
 /* =========================
 ⛽ GAS
