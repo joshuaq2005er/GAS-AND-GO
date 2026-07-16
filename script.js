@@ -1067,11 +1067,9 @@ if (discountType === "code") {
 
     if (code) {
 
-        code.uses = (code.uses || 0) + 1;
+        code.uses = Math.max(0, (code.uses || 0) - 1);
 
-        if (code.uses >= code.maxUses) {
-            code.active = false;
-        }
+        code.active = code.uses < code.maxUses;
 
         localStorage.setItem(
             "discountCodes",
@@ -1079,6 +1077,8 @@ if (discountType === "code") {
         );
 
     }
+
+    discountCodeUsed = "";
 
 }
 
@@ -1135,7 +1135,7 @@ ${order.customerUsername}
 Customer ID:
 ${order.customerID || "None"}
 
---------------------
+--------------------k
 
 `;
 
