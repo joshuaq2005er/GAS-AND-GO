@@ -911,11 +911,7 @@ function clearDiscount(){
 
         if(code){
 
-            code.uses--;
-
-            if(code.uses < 0){
-                code.uses = 0;
-            }
+            code.uses = code.uses - 1;
 
             localStorage.setItem(
                 "discountCodes",
@@ -936,7 +932,6 @@ function clearDiscount(){
     updateDiscountDisplay();
 
 }
-
 // ==============================
 // ORDERS
 // ==============================
