@@ -79,7 +79,7 @@ let products = [
 {name:"Gummy Worms (Any)",price:350,category:"Snacks"},
 {name:"Gummy (Any)",price:250,category:"Snacks"},
 
-{name:"Pup cups",price:50,category:"Snacks"},
+{name:"Pup Cup",price:50,category:"Snacks"},
 {name:"Whip Cream",price:250,category:"Snacks"},
 {name:"Beef Jerky",price:450,category:"Snacks"},
 {name:"Hershey's Chocolate Bar",price:250,category:"Snacks"},
