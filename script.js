@@ -28,6 +28,7 @@ let products = [
 {name:"Bloxy Cola",price:380,category:"Cold Drinks"},
 {name:"Lemonade",price:260,category:"Cold Drinks"},
 {name:"Iced Tea",price:240,category:"Cold Drinks"},
+{name:"Slurpee",price:350,category:"Cold Drinks"},
 
 /* =========================
 ⚡ ENERGY DRINKS
