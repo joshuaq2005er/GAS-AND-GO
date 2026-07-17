@@ -979,15 +979,10 @@ function resetAnalytics(){
 
     if(confirm("Reset analytics data?")){
 
-        orders = [];
-
-        localStorage.setItem(
-            "orders",
-            JSON.stringify(orders)
-        );
-
         loadAnalytics();
         loadDashboard();
+
+        alert("Analytics refreshed.");
 
     }
 
