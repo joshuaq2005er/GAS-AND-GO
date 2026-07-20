@@ -18,149 +18,149 @@ let products = [
 🥤 COLD DRINKS
 ========================= */
 
-{name:"Water",price:150,category:"Cold Drinks"},
-{name:"Milk",price:250,category:"Cold Drinks"},
-{name:"Sparkling Water",price:200,category:"Cold Drinks"},
-{name:"Soda (Any)",price:250,category:"Cold Drinks"},
-{name:"Juice (Any)",price:275,category:"Cold Drinks"},
-{name:"Iced Coffee (Any)",price:350,category:"Cold Drinks"},
-{name:"Coffee (Any)",price:350,category:"Cold Drinks"},
-{name:"Bloxy Cola",price:380,category:"Cold Drinks"},
-{name:"Lemonade",price:260,category:"Cold Drinks"},
-{name:"Iced Tea",price:240,category:"Cold Drinks"},
-{name:"Slurpee (Any)",price:350,category:"Cold Drinks"},
+{name:"Water",price:75,category:"Cold Drinks"},
+{name:"Milk",price:175,category:"Cold Drinks"},
+{name:"Sparkling Water",price:100,category:"Cold Drinks"},
+{name:"Soda (Any)",price:175,category:"Cold Drinks"},
+{name:"Juice (Any)",price:200,category:"Cold Drinks"},
+{name:"Iced Coffee (Any)",price:165,category:"Cold Drinks"},
+{name:"Coffee (Any)",price:165,category:"Cold Drinks"},
+{name:"Bloxy Cola",price:180,category:"Cold Drinks"},
+{name:"Lemonade",price:130,category:"Cold Drinks"},
+{name:"Iced Tea",price:120,category:"Cold Drinks"},
+{name:"Slurpee (Any)",price:165,category:"Cold Drinks"},
 
 /* =========================
 ⚡ ENERGY DRINKS
 ========================= */
 
-{name:"Monster Original Black",price:400,category:"Energy Drinks"},
-{name:"Monster Zero Ultra (White)",price:420,category:"Energy Drinks"},
-{name:"Monster Ultra Fiesta (Mango)",price:430,category:"Energy Drinks"},
-{name:"Monster Ultra Paradise (Tropical Green)",price:430,category:"Energy Drinks"},
-{name:"Monster Ultra Watermelon (Red)",price:440,category:"Energy Drinks"},
-{name:"Monster Ultra Strawberry Dreams",price:450,category:"Energy Drinks"},
-{name:"Monster Pipeline Punch",price:460,category:"Energy Drinks"},
-{name:"Monster Mango Loco",price:460,category:"Energy Drinks"},
-{name:"Monster Pacific Punch",price:470,category:"Energy Drinks"},
-{name:"Monster Lewis Hamilton Edition",price:500,category:"Energy Drinks"},
-{name:"Monster VR46 Valentino Rossi",price:500,category:"Energy Drinks"},
+{name:"Monster Original Black",price:200,category:"Energy Drinks"},
+{name:"Monster Zero Ultra (White)",price:210,category:"Energy Drinks"},
+{name:"Monster Ultra Fiesta (Mango)",price:215,category:"Energy Drinks"},
+{name:"Monster Ultra Paradise (Tropical Green)",price:215,category:"Energy Drinks"},
+{name:"Monster Ultra Watermelon (Red)",price:220,category:"Energy Drinks"},
+{name:"Monster Ultra Strawberry Dreams",price:225,category:"Energy Drinks"},
+{name:"Monster Pipeline Punch",price:230,category:"Energy Drinks"},
+{name:"Monster Mango Loco",price:230,category:"Energy Drinks"},
+{name:"Monster Pacific Punch",price:235,category:"Energy Drinks"},
+{name:"Monster Lewis Hamilton Edition",price:250,category:"Energy Drinks"},
+{name:"Monster VR46 Valentino Rossi",price:250,category:"Energy Drinks"},
 
-{name:"Red Bull Original",price:400,category:"Energy Drinks"},
-{name:"Red Bull",price:420,category:"Energy Drinks"},
-{name:"Red Bull Tropical",price:450,category:"Energy Drinks"},
-{name:"Rockstar Original",price:380,category:"Energy Drinks"},
-{name:"Rockstar Fruit Punch",price:400,category:"Energy Drinks"},
+{name:"Red Bull Original",price:200,category:"Energy Drinks"},
+{name:"Red Bull",price:210,category:"Energy Drinks"},
+{name:"Red Bull Tropical",price:220,category:"Energy Drinks"},
+{name:"Rockstar Original",price:190,category:"Energy Drinks"},
+{name:"Rockstar Fruit Punch",price:200,category:"Energy Drinks"},
 
 
 /* =========================
 🍟 SNACKS
 ========================= */
 
-{name:"Lays Classic",price:225,category:"Snacks"},
-{name:"Lays Sour Cream & Onion",price:225,category:"Snacks"},
-{name:"Lays Paprika",price:240,category:"Snacks"},
-{name:"Doritos Nacho Cheese",price:260,category:"Snacks"},
-{name:"Doritos Cool Ranch",price:260,category:"Snacks"},
-{name:"Doritos Sweet Chili",price:275,category:"Snacks"},
+{name:"Lays Classic",price:110,category:"Snacks"},
+{name:"Lays Sour Cream & Onion",price:110,category:"Snacks"},
+{name:"Lays Paprika",price:120,category:"Snacks"},
+{name:"Doritos Nacho Cheese",price:130,category:"Snacks"},
+{name:"Doritos Cool Ranch",price:130,category:"Snacks"},
+{name:"Doritos Sweet Chili",price:140,category:"Snacks"},
 
-{name:"Cakes (Chips)",price:250,category:"Snacks"},
-{name:"Smarts (Chips)",price:275,category:"Snacks"},
+{name:"Cakes (Chips)",price:125,category:"Snacks"},
+{name:"Smarts (Chips)",price:140,category:"Snacks"},
 
-{name:"Cheetos (Any)",price:280,category:"Snacks"},
-{name:"Cheetos Cheese Puffs (Cheese)",price:290,category:"Snacks"},
-{name:"Cheetos Flamin Hot",price:300,category:"Snacks"},
+{name:"Cheetos (Any)",price:140,category:"Snacks"},
+{name:"Cheetos Cheese Puffs (Cheese)",price:145,category:"Snacks"},
+{name:"Cheetos Flamin Hot",price:150,category:"Snacks"},
 
-{name:"Taxis (Any)",price:300,category:"Snacks"},
-{name:"Taxis Regular (Red)",price:300,category:"Snacks"},
-{name:"Taxis Blue Heat (Blue)",price:325,category:"Snacks"},
-{name:"Taxis Zombie (Greenk)",price:350,category:"Snacks"},
-{name:"Taxis Waves",price:370,category:"Snacks"},
-{name:"Taxis Chippz",price:385,category:"Snacks"},
+{name:"Taxis (Any)",price:150,category:"Snacks"},
+{name:"Taxis Regular (Red)",price:150,category:"Snacks"},
+{name:"Taxis Blue Heat (Blue)",price:175,category:"Snacks"},
+{name:"Taxis Zombie (Greenk)",price:200,category:"Snacks"},
+{name:"Taxis Waves",price:235,category:"Snacks"},
+{name:"Taxis Chippz",price:285,category:"Snacks"},
 
-{name:"Pringles Original",price:250,category:"Snacks"},
-{name:"Pringles Sour Cream",price:260,category:"Snacks"},
-{name:"Pringles Hot & Spicy",price:275,category:"Snacks"},
+{name:"Pringles Original",price:125,category:"Snacks"},
+{name:"Pringles Sour Cream",price:130,category:"Snacks"},
+{name:"Pringles Hot & Spicy",price:140,category:"Snacks"},
 
-{name:"Oreos",price:150,category:"Snacks"},
-{name:"Snickers",price:175,category:"Snacks"},
-{name:"Twix",price:175,category:"Snacks"},
-{name:"KitKat",price:180,category:"Snacks"},
-{name:"M&Ms",price:200,category:"Snacks"},
-{name:"Skittles Original",price:200,category:"Snacks"},
-{name:"Skittles Tropical",price:220,category:"Snacks"},
-{name:"Sour Patch Kids",price:230,category:"Snacks"},
-{name:"Gummy Worms (Any)",price:350,category:"Snacks"},
-{name:"Gummy (Any)",price:250,category:"Snacks"},
+{name:"Oreos",price:75,category:"Snacks"},
+{name:"Snickers",price:85,category:"Snacks"},
+{name:"Twix",price:85,category:"Snacks"},
+{name:"KitKat",price:90,category:"Snacks"},
+{name:"M&Ms",price:100,category:"Snacks"},
+{name:"Skittles Original",price:100,category:"Snacks"},
+{name:"Skittles Tropical",price:110,category:"Snacks"},
+{name:"Sour Patch Kids",price:115,category:"Snacks"},
+{name:"Gummy Worms (Any)",price:175,category:"Snacks"},
+{name:"Gummy (Any)",price:125,category:"Snacks"},
 
-{name:"Pup Cup",price:50,category:"Snacks"},
-{name:"Whip Cream",price:250,category:"Snacks"},
-{name:"Beef Jerky",price:450,category:"Snacks"},
-{name:"Hershey's Chocolate Bar",price:250,category:"Snacks"},
-{name:"Feastables Chocolate Bar",price:300,category:"Snacks"},
-{name:"Luxury Chocolate Bar",price:300,category:"Snacks"},
+{name:"Pup Cup",price:25,category:"Snacks"},
+{name:"Whip Cream",price:125,category:"Snacks"},
+{name:"Beef Jerky",price:225,category:"Snacks"},
+{name:"Hershey's Chocolate Bar",price:125,category:"Snacks"},
+{name:"Feastables Chocolate Bar",price:150,category:"Snacks"},
+{name:"Luxury Chocolate Bar",price:150,category:"Snacks"},
 
-{name:"Ice Cream Cup (Any)",price:150,category:"Snacks"},
-{name:"Ice Cream Cone (Any)",price:250,category:"Snacks"},
-{name:"Ice Cream Waffle (Any)",price:350,category:"Snacks"},
-{name:"Cake (Real Cake)",price:750,category:"Snacks"},
-{name:"Boiled Peanuts",price:200,category:"Snacks"},
-{name:"Protien Bar",price:150,category:"Snacks"},
-{name:"Donut (Any)",price:100,category:"Snacks"},
-{name:"3 Donut Box (Any)",price:300,category:"Snacks"},
-{name:"6 Donut Box (Any)",price:600,category:"Snacks"},
-{name:"9 Donut Box (Any)",price:900,category:"Snacks"},
-{name:"Dozen Donut (Any)",price:1200,category:"Snacks"},
+{name:"Ice Cream Cup (Any)",price:75,category:"Snacks"},
+{name:"Ice Cream Cone (Any)",price:125,category:"Snacks"},
+{name:"Ice Cream Waffle (Any)",price:175,category:"Snacks"},
+{name:"Cake (Real Cake)",price:375,category:"Snacks"},
+{name:"Boiled Peanuts",price:100,category:"Snacks"},
+{name:"Protien Bar",price:75,category:"Snacks"},
+{name:"Donut (Any)",price:50,category:"Snacks"},
+{name:"3 Donut Box (Any)",price:150,category:"Snacks"},
+{name:"6 Donut Box (Any)",price:300,category:"Snacks"},
+{name:"9 Donut Box (Any)",price:450,category:"Snacks"},
+{name:"Dozen Donut (Any)",price:600,category:"Snacks"},
 
 
 /* =========================
 🌭 HOT FOOD
 ========================= */
 
-{name:"Hot Dog",price:500,category:"Hot Food"},
-{name:"Sausage Roll",price:550,category:"Hot Food"},
-{name:"Nachos",price:600,category:"Hot Food"},
-{name:"Pizza Slice",price:475,category:"Hot Food"},
-{name:"Chicken Tenders (3pc)",price:650,category:"Hot Food"},
-{name:"Loaded Fries",price:700,category:"Hot Food"},
-{name:"Chili Cheese Dog",price:575,category:"Hot Food"},
-{name:"Breakfast Sandwich",price:525,category:"Hot Food"},
+{name:"Hot Dog",price:250,category:"Hot Food"},
+{name:"Sausage Roll",price:275,category:"Hot Food"},
+{name:"Nachos",price:300,category:"Hot Food"},
+{name:"Pizza Slice",price:235,category:"Hot Food"},
+{name:"Chicken Tenders (3pc)",price:325,category:"Hot Food"},
+{name:"Loaded Fries",price:450,category:"Hot Food"},
+{name:"Chili Cheese Dog",price:290,category:"Hot Food"},
+{name:"Breakfast Sandwich",price:265,category:"Hot Food"},
 
 
 /* =========================
 ➕ EXTRAS
 ========================= */
 
-{name:"Gum",price:100,category:"Extras"},
-{name:"Mints",price:125,category:"Extras"},
-{name:"Energy Shot",price:300,category:"Extras"},
-{name:"Protein Shake",price:450,category:"Extras"},
-{name:"Ice Bag",price:200,category:"Extras"},
-{name:"Ice Cream Toppings (Any)",price:50,category:"Extras"},
+{name:"Gum",price:50,category:"Extras"},
+{name:"Mints",price:65,category:"Extras"},
+{name:"Energy Shot",price:150,category:"Extras"},
+{name:"Protein Shake",price:225,category:"Extras"},
+{name:"Ice Bag",price:100,category:"Extras"},
+{name:"Ice Cream Toppings (Any)",price:25,category:"Extras"},
 
 /* =========================
 ⛽ GAS
 ========================= */
 
-{name:"Regular Fuel",price:749,category:"Gas"},
-{name:"Plus Fuel (Diesel)",price:829,category:"Gas"},
-{name:"Premium Fuel",price:949,category:"Gas"},
-{name:"Exclusive Fuel",price:1250,category:"Gas"},
+{name:"Regular Fuel",price:379,category:"Gas"},
+{name:"Plus Fuel (Diesel)",price:419,category:"Gas"},
+{name:"Premium Fuel",price:479,category:"Gas"},
+{name:"Exclusive Fuel",price:625,category:"Gas"},
 
 /* =========================
 ⛽ Electric
 ========================= */
-{name:"Regular Electric Charge",price:629,category:"Gas"},
-{name:"Plus Electric Charge",price:739,category:"Gas"},
-{name:"Premium Electric Charge",price:819,category:"Gas"},
-{name:"Exclusive Electric Charge",price:929,category:"Gas"},
+{name:"Regular Electric Charge",price:319,category:"Gas"},
+{name:"Plus Electric Charge",price:379,category:"Gas"},
+{name:"Premium Electric Charge",price:419,category:"Gas"},
+{name:"Exclusive Electric Charge",price:469,category:"Gas"},
 
 /* =========================
 🚗 CAR WASH
 ========================= */
 
-{name:"Normal Car Wash (Outside)",price:650,category:"Gas"},
-{name:"Deluxe Car Wash (Inside + Outside)",price:1250,category:"Gas"}
+{name:"Normal Car Wash (Outside)",price:325,category:"Gas"},
+{name:"Deluxe Car Wash (Inside + Outside)",price:625,category:"Gas"}
 ];
 
 
